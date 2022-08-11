@@ -5,7 +5,7 @@
 			<div class="footer__items">
 				<div class="footer__title">Присоединиться:</div>
 				<div class="footer__icon-box">
-					<a href="#" class="footer__icon"><img src="../assets/img/footer/vk.svg" alt=""></a>
+					<router-link to="/loader" class="footer__icon"><img src="../assets/img/footer/vk.svg" alt=""></router-link>
 					<router-link to="/" class="footer__icon"><img src="../assets/img/footer/insta.svg" alt=""></router-link>
 					<router-link to="/test" class="footer__icon"><img src="../assets/img/footer/youtube.svg" alt=""></router-link>
 				</div>
