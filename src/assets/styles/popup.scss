@@ -32,6 +32,12 @@
 		@media (max-width: 500px) {
 			padding: 20px;
 		}
+		&-login {
+			max-width: 1000px;
+		}
+		&-profile {
+			max-width: 1200px;
+		}
 	}
 	&__items {
 		display: flex;
@@ -40,6 +46,10 @@
 		justify-content: center;
 		flex-direction: column;
 		margin: 0px auto;
+		&-profile {
+			flex-direction: row;
+			column-gap: 30px;
+		}
 	}
 	&__title {
 		font-weight: 700;
@@ -51,6 +61,9 @@
 			line-height: 36px;
 			text-align: center;
 			margin-top: 15px;
+		}
+		&-login {
+			margin: 0px;
 		}
 	}
 	&__wrapper-input {

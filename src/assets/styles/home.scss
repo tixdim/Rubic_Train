@@ -606,11 +606,45 @@
 		row-gap: 10px;
 	}
 	&__img {
+		position: relative;
+		display: inline-flex;
+		border-radius: 50%;
+		border: 3px solid #fff;
 		& img {
 			width: 200px;
 			height: 200px;
 			border-radius: 50%;
-			border: 3px solid #fff;
+		}
+		&-active {
+			background: #fff;
+			& img {
+				opacity: 0.5;
+			}
+		}
+		&-check {
+			position: absolute;
+			top: 25%;
+			left: 75%;
+			display:inline-block;
+			width: 1px;
+			height: 1px;
+			transform: rotate(45deg);
+		}
+		&-stick-1 {
+			position: absolute;
+			width: 30px;
+			height: 110px;
+			background-color:#64B369;
+			border-radius: 25px 25px 25px 0px;
+		}
+		&-stick-2 {
+			position: absolute;
+			top: 80px;
+			right: 0px;
+			width: 40px;
+			height: 30px;
+			background-color:#64B369;
+			border-radius: 25px 0px 0px 25px;
 		}
 	}
 	&__box-name {

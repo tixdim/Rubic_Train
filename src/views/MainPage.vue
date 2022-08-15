@@ -89,14 +89,24 @@
 <script>
 import headerComponents from '../components/header'
 import footerComponents from '../components/footer'
-import popupCard from '../components/popup-card'
 import popupCardOtjimaniy from '../components/popup-card-otjimaniy'
 import popupCardPodtygivaniy from '../components/popup-card-podtygivaniy'
 import popupCardPress from '../components/popup-card-press'
 import popupCardNaNogi from '../components/popup-card-na-nogi'
+import popupCard from '../components/popup-card'
 
 export default {
 	name: 'mainPage',
+		components: {
+		headerComponents,
+		footerComponents,
+		popupCard,
+		popupCardOtjimaniy,
+		popupCardPodtygivaniy,
+		popupCardPress,
+		popupCardNaNogi,
+	},
+
 	data() {
 		return {
 			isPopup: false,
@@ -153,15 +163,6 @@ export default {
 				return
 			}
 		},
-	},
-	components: {
-		headerComponents,
-		footerComponents,
-		popupCard,
-		popupCardOtjimaniy,
-		popupCardPodtygivaniy,
-		popupCardPress,
-		popupCardNaNogi,
 	},
 }
 </script>

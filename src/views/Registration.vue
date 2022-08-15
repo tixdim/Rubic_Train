@@ -54,6 +54,21 @@
 				</div>
 			</div>
 		</main>
+		<transition name="modal">
+			<div v-if="isPopupLogin" @closePopup="closePopup" class="popup popup_card-otjimaniy">
+				<div class="popup__content">
+					<div class="popup__body popup__body-login">
+						<div class="popup__items">
+							<div class="popup__title popup__title-login">{{text}}</div>
+						</div>
+						<div class="popup__cross" @click="closePopup">
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 		<footer-components/>
 	</div>
 </template>
@@ -72,6 +87,8 @@ export default {
 
 	data() {
 		return {
+			text: "",
+			isPopupLogin: false,
 			showPass: false,
 			showPassTwo: false,
 			firstPass: "",
@@ -97,7 +114,7 @@ export default {
 			}
 
 			await axios
-    			.post('http://localhost:63002/api/Users/Registration', {
+				.post('http://localhost:63002/api/Users/Registration', {
 					email: document.querySelector("._email").value,
 					nickname: document.querySelector("._nickname").value,
 					firstPassword: this.firstPass,
@@ -106,10 +123,17 @@ export default {
 					name: document.querySelector("._name").value,
 					surname: document.querySelector("._surname").value
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					this.text = error["response"]["data"];
+					this.isPopupLogin = true;
+					if(this.isPopupLogin){
+						document.documentElement.style.overflow = 'hidden'
+						return
+					}
+					console.log(this.isPopupLogin);
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				window.location.href = '/';
@@ -117,7 +141,14 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	}
+		},
+		closePopup() {
+			this.isPopupLogin = false;
+			if(this.closePopup){
+				document.documentElement.style.overflow = 'auto'
+				return
+			}
+		}
 	}
 }
 </script>

@@ -7,6 +7,9 @@
 					<div class="profile__items">
 						<div class="profile__item-box">
 							<div class="profile__info-box">
+								<button class="profile__img" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-1.png" alt="">
+								</button>
 								<div class="profile__box-name">
 									<div class="profile__name"> {{name}} </div>
 									<div class="profile__surname"> {{surname}} </div>
@@ -19,6 +22,11 @@
 									</router-link>
 									<router-link to="/password-profile" class="profile__password-rename">
 										<div class="profile__password-rename-txt">Сменить пароль</div>
+									</router-link>
+								</div>
+								<div class="profile__button-box">
+									<router-link to="/main-page" class="profile__edit">
+										<div class="profile__edit-txt">Добавить тренировку</div>
 									</router-link>
 								</div>
 							</div>
@@ -117,6 +125,47 @@
 				</div>
 			</div>
 		</main>
+		<transition name="modal">
+			<div v-if="isPopupProfile" @closePopup="closePopup" class="popup popup_card-otjimaniy">
+				<div class="popup__content">
+					<div class="popup__body popup__body-profile">
+						<div class="popup__items popup__items-profile">
+							<button class="profile__img profile__img-active">
+								<img src="../assets/img/homepage/ava-1.png" alt="">
+								<div class="profile__img-check">
+									<div class="profile__img-stick-1"></div>
+									<div class="profile__img-stick-2"></div>
+								</div>
+							</button>
+							<button class="profile__img">
+								<img src="../assets/img/homepage/ava-2.png" alt="">
+							</button>
+							<button class="profile__img profile__img-active">
+								<img src="../assets/img/homepage/ava-3.png" alt="">
+								<div class="profile__img-check">
+									<div class="profile__img-stick-1"></div>
+									<div class="profile__img-stick-2"></div>
+								</div>
+							</button>
+							<button class="profile__img">
+								<img src="../assets/img/homepage/ava-4.png" alt="">
+							</button>
+							<button class="profile__img profile__img-active">
+								<img src="../assets/img/homepage/ava-5.png" alt="">
+								<div class="profile__img-check">
+									<div class="profile__img-stick-1"></div>
+									<div class="profile__img-stick-2"></div>
+								</div>
+							</button>
+						</div>
+						<div class="popup__cross" @click="closePopup">
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 		<footer-components/>
 </div>
 </template>
@@ -135,6 +184,7 @@ export default {
 
 	data() {
 		return {
+			isPopupProfile: false,
 			info: null,
 			id: 0,
 			email: "",
@@ -161,26 +211,40 @@ export default {
 
 	async mounted() {
 		await axios
-    		.get('http://localhost:63002/api/Workouts/GetWorkoutCount/' + this.id)
-    		.then((response) => (this.countTrain = response["data"]))
+			.get('http://localhost:63002/api/Workouts/GetWorkoutCount/' + this.id)
+			.then((response) => (this.countTrain = response["data"]))
 			.catch(error => {
-        		console.log(error["response"]["data"]);
-      		});
+				console.log(error["response"]["data"]);
+			});
 
 		await axios
-    		.get('http://localhost:63002/api/Workouts/GetAllWorkoutPlans/' + this.id + '/' + this.countTrain + '/0')
-    		.then((response) => (this.info = response["data"]))
+			.get('http://localhost:63002/api/Workouts/GetAllWorkoutPlans/' + this.id + '/' + this.countTrain + '/0')
+			.then((response) => (this.info = response["data"]))
 			.catch(error => {
-        		console.log(error["response"]["data"]);
-      		});
+				console.log(error["response"]["data"]);
+			});
 
 		console.log(this.info)
-    },
+		},
 
-    methods: {
+	methods: {
 		async deletTrain() {
 			console.log(train);
-    	}
+		},
+		openPopupProfile() {
+			this.isPopupProfile = true;
+			if(this.openPopupProfile){
+				document.documentElement.style.overflow = 'hidden'
+				return
+			}
+		},
+		closePopup() {
+			this.isPopupProfile = false;
+			if(this.closePopup){
+				document.documentElement.style.overflow = 'auto'
+				return
+			}
+		}
 	}
 }
 </script>
