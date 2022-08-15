@@ -7,7 +7,6 @@
 					<div class="profile__items">
 						<div class="profile__item-box">
 							<div class="profile__info-box">
-								<div class="profile__img"><img src="../assets/img/header/profile.svg" alt=""></div>
 								<div class="profile__box-name">
 									<div class="profile__name"> {{name}} </div>
 									<div class="profile__surname"> {{surname}} </div>
@@ -26,7 +25,6 @@
 						</div>
 						<div class="profile__item-box">
 							<div v-if="countTrain === 0" class="profile__title">У вас ещё не было тренировок, советуем начать!</div>
-
 							<div v-else class="profile__wrapper-card">
 								<div class="profile__title">Ваши тренировки</div>
 								<div class="profile__box-card">
@@ -39,18 +37,25 @@
 												<img src="../assets/img/homepage/tren-podtygivaniy.jpg" alt="">
 											</div>
 											<div v-else-if="train.exercise === 'пресс'" class='profile-card__bg'>
-											    <img src="../assets/img/homepage/tren-press.jpg" alt="">
+												<img src="../assets/img/homepage/tren-press.jpg" alt="">
 											</div>
 											<div v-else-if="train.exercise === 'на ноги'" class='profile-card__bg'>
 												<img src="../assets/img/homepage/tren-na-nogi.jpg" alt="">
 											</div>
-											<div v-else>
-											  	// какая-то картинка общая
+											<div v-else class='profile-card__bg'>
+												<img src="../assets/img/homepage/tren.jpg" alt="">
 											</div>
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: {{ train.startWorkoutDate }}</div>
+													<div class="profile-card__sub-title">Добавлено: <span>{{ train.startWorkoutDate }}</span></div>
+													<div class="profile-card__box-cross">
+														<a @click="deletTrain" class="profile-card__cross">
+															<span></span>
+															<div class="profile-card__cross-promt">Удалить тренировку</div>
+															<span></span>
+														</a>
+													</div>
 												</div>
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
@@ -63,13 +68,6 @@
 													</div>
 												</div>
 											</div>
-											<div class="profile-card__box-cross">
-												<a @click="deletTrain" class="profile-card__cross">
-													<span></span>
-													<div class="profile-card__cross-promt">Удалить тренировку</div>
-													<span></span>
-												</a>
-											</div>
 										</div>
 										<div v-else class='profile__card profile-card _card-red'>
 											<div v-if="train.exercise === 'отжимания'" class="profile-card__bg">
@@ -79,18 +77,18 @@
 												<img src="../assets/img/homepage/tren-podtygivaniy.jpg" alt="">
 											</div>
 											<div v-else-if="train.exercise === 'пресс'" class='profile-card__bg'>
-											    <img src="../assets/img/homepage/tren-press.jpg" alt="">
+												<img src="../assets/img/homepage/tren-press.jpg" alt="">
 											</div>
 											<div v-else-if="train.exercise === 'на ноги'" class='profile-card__bg'>
 												<img src="../assets/img/homepage/tren-na-nogi.jpg" alt="">
 											</div>
-											<div v-else>
-											  	// какая-то картинка общая
+											<div v-else class='profile-card__bg'>
+												<img src="../assets/img/homepage/tren.jpg" alt="">
 											</div>
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: {{ train.startWorkoutDate }}</div>
+													<div class="profile-card__sub-title">Добавлено: <span>{{ train.startWorkoutDate }}</span></div>
 												</div>
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
