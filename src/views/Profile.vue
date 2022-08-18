@@ -7,7 +7,7 @@
 					<div class="profile__items">
 						<div class="profile__item-box">
 							<div class="profile__info-box">
-								<button class="profile__img" @click="openPopupProfile">
+								<button class="profile__img profile__img-main" @click="openPopupProfile">
 									<img src="../assets/img/homepage/ava-1.png" alt="">
 								</button>
 								<div class="profile__box-name">
@@ -139,6 +139,10 @@
 							</button>
 							<button class="profile__img">
 								<img src="../assets/img/homepage/ava-2.png" alt="">
+								<div class="profile__img-check">
+									<div class="profile__img-stick-1"></div>
+									<div class="profile__img-stick-2"></div>
+								</div>
 							</button>
 							<button class="profile__img profile__img-active">
 								<img src="../assets/img/homepage/ava-3.png" alt="">
@@ -149,8 +153,12 @@
 							</button>
 							<button class="profile__img">
 								<img src="../assets/img/homepage/ava-4.png" alt="">
+								<div class="profile__img-check">
+									<div class="profile__img-stick-1"></div>
+									<div class="profile__img-stick-2"></div>
+								</div>
 							</button>
-							<button class="profile__img profile__img-active">
+							<button class="profile__img">
 								<img src="../assets/img/homepage/ava-5.png" alt="">
 								<div class="profile__img-check">
 									<div class="profile__img-stick-1"></div>

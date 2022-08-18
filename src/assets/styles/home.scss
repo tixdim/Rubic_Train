@@ -615,13 +615,23 @@
 			height: 200px;
 			border-radius: 50%;
 		}
+		&-main {
+			transition: 0.3s;
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
 		&-active {
 			background: #000;
 			& img {
 				opacity: 0.5;
 			}
+			.profile__img-check {
+				display: block !important;
+			}
 		}
 		&-check {
+			display: none !important;
 			position: absolute;
 			top: 25%;
 			left: 75%;
