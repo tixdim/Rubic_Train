@@ -27,7 +27,7 @@
 			</div>
 		</main>
 		<transition name="modal">
-			<div v-if="isPopupLogin" @closePopup="closePopup" class="popup popup_card-otjimaniy">
+			<div v-if="isPopupLogin" @closePopup="closePopup" class="popup popup-login">
 				<div class="popup__content">
 					<div class="popup__body popup__body-login">
 						<div class="popup__items">

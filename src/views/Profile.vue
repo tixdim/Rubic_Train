@@ -126,7 +126,7 @@
 			</div>
 		</main>
 		<transition name="modal">
-			<div v-if="isPopupProfile" @closePopup="closePopup" class="popup popup_card-otjimaniy">
+			<div v-if="isPopupProfile" @closePopup="closePopup" class="popup popup-profile">
 				<div class="popup__content">
 					<div class="popup__body popup__body-profile">
 						<div class="popup__items popup__items-profile">
