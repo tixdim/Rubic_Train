@@ -865,6 +865,7 @@
 			width: 20px;
 			height: 20px;
 			&:hover {
+				cursor: pointer;
 				.profile-card__cross-promt {
 					position: absolute;
 					top: 35px;

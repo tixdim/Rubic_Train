@@ -205,7 +205,6 @@ export default {
 			countTrain: 0
 		}
 	},
-
 	created() {
 		this.id = localStorage.getItem("id")
 		this.email = localStorage.getItem("email")

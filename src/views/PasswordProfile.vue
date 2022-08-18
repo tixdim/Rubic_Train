@@ -34,6 +34,21 @@
 				</div>
 			</div>
 		</main>
+		<transition name="modal">
+			<div v-if="isPopupMessage" @closePopup="closePopup" class="popup popup-message">
+				<div class="popup__content">
+					<div class="popup__body popup__body-message">
+						<div class="popup__items">
+							<div class="popup__title popup__title-message">{{text}}</div>
+						</div>
+						<div class="popup__cross" @click="closePopup">
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 		<footer-components/>
 	</div>
 </template>
@@ -45,8 +60,15 @@ import axios from "axios"
 
 export default {
 	name: 'passwordProfilePage',
+	components: {
+		headerComponents,
+		footerComponents,
+	},
+
 	data() {
 		return {
+			text: "",
+			isPopupMessage: false,
 			showPass: false,
 			showPassTwo: false,
 			firstPass: "",
@@ -76,14 +98,21 @@ export default {
 			console.log(this.id)
 
 			await axios
-    			.patch('http://localhost:63002/api/Users/UpdatePasswordWithOldUser/' + this.id, {
+				.patch('http://localhost:63002/api/Users/UpdatePasswordWithOldUser/' + this.id, {
 					oldPassword: this.firstPass,
-  					newPassword: this.secondPass
+					newPassword: this.secondPass
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					this.text = error["response"]["data"];
+					this.isPopupMessage = true;
+					if(this.isPopupMessage){
+						document.documentElement.style.overflow = 'hidden'
+						return
+					}
+					console.log(this.isPopupMessage);
+					console.log(error["response"]["data"]);
+				});
 
 			console.log(this.info)
 			console.log(this.id)
@@ -103,11 +132,14 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
+		closePopup() {
+			this.isPopupMessage = false;
+			if(this.closePopup){
+				document.documentElement.style.overflow = 'auto'
+				return
+			}
+		}
 	},
-	components: {
-		headerComponents,
-		footerComponents,
-	}
 }
 </script>

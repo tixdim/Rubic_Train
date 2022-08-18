@@ -55,8 +55,7 @@ export default {
 		return {
 			info: null
 		}
-	},	
-
+	},
 	mounted() {
 		let userNameTren = sessionStorage.getItem('userNameTren');
 		let userTilteTren = document.querySelector("._title-card").innerHTML = `Тренировка ${userNameTren}`;

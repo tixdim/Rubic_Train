@@ -38,6 +38,11 @@ import footerComponents from '../components/footer'
 
 export default {
 	name: 'passwordPage',
+	components: {
+		headerFormComponents,
+		footerComponents,
+	},
+
 	data() {
 		return {
 			showPass: false,
@@ -56,24 +61,20 @@ export default {
 			console.log(this.info);
 
 			await axios
-    			.post('http://localhost:63002/api/Users/UpdatePasswordWithNewUser/', {userId: this.userID}, {
+				.post('http://localhost:63002/api/Users/UpdatePasswordWithNewUser/', {userId: this.userID}, {
 					newPassword: this.Pass,
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 200 || this.info["status"] == 201) {
 				window.location.href = '/';
 			}
 
 			console.log(this.info)
-    	}
+		}
 	},
-	components: {
-		headerFormComponents,
-		footerComponents,
-	}
 }
 </script>

@@ -50,7 +50,7 @@ export default {
 		headerCardComponents,
 		footerComponents,
 	},
-	
+
 	data() {
 		return {
 			info: null

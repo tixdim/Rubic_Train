@@ -27,11 +27,11 @@
 			</div>
 		</main>
 		<transition name="modal">
-			<div v-if="isPopupLogin" @closePopup="closePopup" class="popup popup-login">
+			<div v-if="isPopupMessage" @closePopup="closePopup" class="popup popup-message">
 				<div class="popup__content">
-					<div class="popup__body popup__body-login">
+					<div class="popup__body popup__body-message">
 						<div class="popup__items">
-							<div class="popup__title popup__title-login">{{text}}</div>
+							<div class="popup__title popup__title-message">{{text}}</div>
 						</div>
 						<div class="popup__cross" @click="closePopup">
 							<span></span>
@@ -56,11 +56,11 @@ export default {
 		headerFormComponents,
 		footerComponents,
 	},
-	
+
 	data() {
 		return {
 			text: "",
-			isPopupLogin: false,
+			isPopupMessage: false,
 			showPass: false,
 			Pass: "",
 			info: null,
@@ -83,12 +83,12 @@ export default {
 				.then((response) => (this.info = response))
 				.catch(error => {
 					this.text = error["response"]["data"];
-					this.isPopupLogin = true;
-					if(this.isPopupLogin){
+					this.isPopupMessage = true;
+					if(this.isPopupMessage){
 						document.documentElement.style.overflow = 'hidden'
 						return
 					}
-					console.log(this.isPopupLogin);
+					console.log(this.isPopupMessage);
 					console.log(error["response"]["data"]);
 				});
 
@@ -108,7 +108,7 @@ export default {
 			}
 		},
 		closePopup() {
-			this.isPopupLogin = false;
+			this.isPopupMessage = false;
 			if(this.closePopup){
 				document.documentElement.style.overflow = 'auto'
 				return
