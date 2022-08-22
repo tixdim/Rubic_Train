@@ -61,6 +61,7 @@ export default {
     			.then((response) => (this.info = response))
 				.catch(error => {
         			console.log(error["response"]["data"]);
+					//название метода();
       			});
 
 			if (this.info["status"] == 200) {
@@ -74,9 +75,9 @@ export default {
 				localStorage.setItem("avatarUrl", this.info["data"]["avatarUrl"])
 				window.location.href = '/profile';
 			}
-			else {
-				console.log(this.info)
-			}
+			//else {
+			//	console.log(this.info)
+			//}
     	},
 	},
 	components: {

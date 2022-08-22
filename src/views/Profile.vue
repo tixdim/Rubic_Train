@@ -48,7 +48,7 @@
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: <span>{{ train.startWorkoutDate }}</span></div>
+													<div class="profile-card__sub-title">Добавлено: <span>{{train.startWorkoutDate.split('-')[2].split("T")[0]}}.{{ train.startWorkoutDate.split('-')[1]}}.{{ train.startWorkoutDate.split('-')[0] }}</span></div>
 													<div class="profile-card__box-cross">
 														<a @click="deletTrain" class="profile-card__cross">
 															<span></span>
@@ -60,7 +60,11 @@
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Длительность тренировки:</div>
-														<div class="profile-card__info-text"> {{ train.workoutTime }} </div>
+														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
+														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) || 
+														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) || 
+														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
+														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут	 </div>
 													</div>
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Статус тренировки:</div>
@@ -88,12 +92,16 @@
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: <span>{{ train.startWorkoutDate }}</span></div>
+													<div class="profile-card__sub-title">Добавлено: <span>{{train.startWorkoutDate.split('-')[2].split("T")[0]}}.{{ train.startWorkoutDate.split('-')[1]}}.{{ train.startWorkoutDate.split('-')[0] }}</span></div>
 												</div>
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Длительность тренировки:</div>
-														<div class="profile-card__info-text"> {{ train.workoutTime }} </div>
+														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
+														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) || 
+														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) || 
+														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
+														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут	 </div>
 													</div>
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Статус тренировки:</div>
@@ -118,7 +126,7 @@
 			</div>
 		</main>
 		<footer-components/>
-</div>
+	</div>
 </template>
 
 <script>
@@ -173,13 +181,11 @@ export default {
 			.catch(error => {
         		console.log(error["response"]["data"]);
       		});
-
-		console.log(this.info)
     },
 
     methods: {
 		async deletTrain() {
-			console.log(train);
+			// console.log(this.info);
     	}
 	}
 }
