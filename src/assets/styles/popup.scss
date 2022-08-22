@@ -92,7 +92,16 @@
 		font-weight: 400;
 		font-size: 18px;
 		line-height: 21px;
+		border: 2px solid #000;
 		color: #000;
+		
+		&._focus  {
+			color: #f00;
+			border: 2px solid #f00;
+			&::-webkit-input-placeholder {
+				color:#f00;
+			}
+		}
 		@media (max-width: 500px) {
 			width: 100%;
 			min-width: auto;

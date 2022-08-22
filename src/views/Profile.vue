@@ -7,8 +7,20 @@
 					<div class="profile__items">
 						<div class="profile__item-box">
 							<div class="profile__info-box">
-								<button class="profile__img profile__img-main" @click="openPopupProfile">
+								<button v-if="avatarUrl === 1" class="profile__img profile__img-main" @click="openPopupProfile">
 									<img src="../assets/img/homepage/ava-1.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl === 2" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-2.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl === 3" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-3.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl === 4" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-4.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl === 5" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-5.png" alt="">
 								</button>
 								<div class="profile__box-name">
 									<div class="profile__name"> {{name}} </div>
@@ -209,7 +221,7 @@ export default {
 			name: "",
 			surname: "",
 			dateRegistration: "",
-			avatarUrl: "",
+			avatarUrl: 0,
 			countTrain: 0
 		}
 	},
