@@ -26,6 +26,21 @@
 				</div>
 			</div>
 		</main>
+		<transition name="modal">
+			<div v-if="isPopupMessage" @closePopup="closePopup" class="popup popup-message">
+				<div class="popup__content">
+					<div class="popup__body popup__body-message">
+						<div class="popup__items">
+							<div class="popup__title popup__title-message">{{text}}</div>
+						</div>
+						<div class="popup__cross" @click="closePopup">
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 		<footer-components/>
 	</div>
 </template>
@@ -37,8 +52,15 @@ import axios from "axios"
 
 export default {
 	name: 'loginPage',
+	components: {
+		headerFormComponents,
+		footerComponents,
+	},
+
 	data() {
 		return {
+			text: "",
+			isPopupMessage: false,
 			showPass: false,
 			Pass: "",
 			info: null,
@@ -54,15 +76,21 @@ export default {
 			}
 
 			await axios
-    			.post('http://localhost:63002/api/Users/Authentication', {
+				.post('http://localhost:63002/api/Users/Authentication', {
 					email: document.querySelector("._email-auth").value,
 					password: this.Pass,
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-					//название метода();
-      			});
+        			this.text = error["response"]["data"];
+					this.isPopupMessage = true;
+					if(this.isPopupMessage){
+						document.documentElement.style.overflow = 'hidden'
+						return
+					}
+					console.log(this.isPopupMessage);
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 200) {
 				localStorage.setItem("email", this.info["data"]["email"])
@@ -75,14 +103,17 @@ export default {
 				localStorage.setItem("avatarUrl", this.info["data"]["avatarUrl"])
 				window.location.href = '/profile';
 			}
-			//else {
-			//	console.log(this.info)
-			//}
-    	},
-	},
-	components: {
-		headerFormComponents,
-		footerComponents,
+			else {
+				console.log(this.info)
+			}
+		},
+		closePopup() {
+			this.isPopupMessage = false;
+			if(this.closePopup){
+				document.documentElement.style.overflow = 'auto'
+				return
+			}
+		}
 	},
 }
 </script>

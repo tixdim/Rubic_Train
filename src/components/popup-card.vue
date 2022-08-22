@@ -5,10 +5,10 @@
 			<div class="popup__items">
 				<div class="popup__title">Добавить тренировку</div>
 				<div class="popup__wrapper-input">
-					<input type="text" data-value="" placeholder="Название тренировки" class="popup__input _req _tren">
+					<input required type="text" data-value="" pattern="^[А-Яа-яЁё\s]+$" placeholder="Название тренировки" class="popup__input _req _tren">
 				</div>
 				<div class="popup__wrapper-input">
-					<input type="time" data-value="" class="popup__input _req _time">
+					<input required type="time" data-value="" class="popup__input _req _time">
 				</div>
 				<div class="popup__box-button">
 					<div class="popup__button popup__close" @click="closePopup">

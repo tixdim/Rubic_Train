@@ -56,8 +56,7 @@ export default {
 			info: null,
 			start_time: 0,
 		}
-	},	
-
+	},
 	mounted() {
 		this.start_time = parseInt(sessionStorage.getItem('itog_time'));
 		let userNameTren = sessionStorage.getItem('userNameTren');

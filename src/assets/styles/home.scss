@@ -606,11 +606,65 @@
 		row-gap: 10px;
 	}
 	&__img {
+		position: relative;
+		display: inline-flex;
+		border-radius: 50%;
+		border: 3px solid #fff;
+		@media (max-width:$md4) {
+			border: 2px solid #fff;
+		}
 		& img {
-			width: 200px;
-			height: 200px;
+			@include adaptiv-value("width", 200, 50, 1);
+			@include adaptiv-value("height", 200, 50, 1);
 			border-radius: 50%;
+		}
+		&-main {
 			border: 3px solid #fff;
+			transition: 0.3s;
+			& img {
+				width: 200px;
+				height: 200px;
+			}
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+		&-active {
+			background: #000;
+			& img {
+				opacity: 0.5;
+			}
+			.profile__img-check {
+				display: block !important;
+			}
+		}
+		&-check {
+			display: none !important;
+			position: absolute;
+			top: 25%;
+			left: 75%;
+			width: 1px;
+			height: 1px;
+			transform: rotate(45deg);
+		}
+		&-stick-1 {
+			position: absolute;
+			@include adaptiv-value("width", 30, 10, 1);
+			@include adaptiv-value("height", 110, 30, 1);
+			background-color:#64B369;
+			border-radius: 25px 25px 25px 0px;
+		}
+		&-stick-2 {
+			position: absolute;
+			@include adaptiv-value("width", 40, 15, 1);
+			@include adaptiv-value("height", 30, 10, 1);
+			@include adaptiv-value("top", 80, 20, 1);
+			right: 0px;
+			//top: 80px;
+			//width: 40px;
+			//height: 30px;
+			background-color:#64B369;
+			border-radius: 25px 0px 0px 25px;
 		}
 	}
 	&__box-name {
@@ -811,6 +865,7 @@
 			width: 20px;
 			height: 20px;
 			&:hover {
+				cursor: pointer;
 				.profile-card__cross-promt {
 					position: absolute;
 					top: 35px;

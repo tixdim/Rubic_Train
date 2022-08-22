@@ -36,29 +36,34 @@ import axios from "axios"
 
 export default {
 	name: 'editProfilePage',
+	components: {
+		headerComponents,
+		footerComponents,
+	},
+
 	data() {
 		return {
 			info: null,
 			id: 0,
 			isBoy: false
 		}
-	},	
+	},
 	methods: {
 		async sendButtonEditProf() {
 			this.id = localStorage.getItem("id")
 			this.isBoy = (localStorage.getItem("isBoy").toLowerCase() === 'true');
 
 			await axios
-    			.patch('http://localhost:63002/api/Users/UpdateUser/' + this.id, {
+				.patch('http://localhost:63002/api/Users/UpdateUser/' + this.id, {
 					nickname: document.querySelector("._nickname-edit").value,
-  					name: document.querySelector("._name-edit").value,
-  					surname: document.querySelector("._surname-edit").value,
+					name: document.querySelector("._name-edit").value,
+					surname: document.querySelector("._surname-edit").value,
 					isBoy: this.isBoy
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			console.log(this.info)
 
@@ -76,11 +81,7 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
 	},
-	components: {
-		headerComponents,
-		footerComponents,
-	}
 }
 </script>

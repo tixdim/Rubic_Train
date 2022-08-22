@@ -50,13 +50,12 @@ export default {
 		headerCardComponents,
 		footerComponents
 	},
-	
+
 	data() {
 		return {
 			info: null
 		}
 	},
-
 	mounted() {
 		let time = sessionStorage.getItem('secondsTimeOtjimaniy');
 		const countDown = document.querySelector("._timer");

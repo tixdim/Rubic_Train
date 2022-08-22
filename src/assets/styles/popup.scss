@@ -32,6 +32,18 @@
 		@media (max-width: 500px) {
 			padding: 20px;
 		}
+		&-message {
+			max-width: 1000px;
+		}
+		&-profile {
+			max-width: 1200px;
+			@media (max-width: 500px) {
+				padding: 50px;
+			}
+			@media (max-width:$md4) {
+				padding: 30px;
+			}
+		}
 	}
 	&__items {
 		display: flex;
@@ -40,6 +52,16 @@
 		justify-content: center;
 		flex-direction: column;
 		margin: 0px auto;
+		&-profile {
+			flex-direction: row;
+			@include adaptiv-value("column-gap", 25, 10, 1);
+			@media (max-width:$md3) {
+				flex-wrap: wrap;
+				row-gap: 15px;
+				@include adaptiv-value("padding-right", 115, 10, 0);
+				@include adaptiv-value("padding-left", 115, 10, 0);
+			}
+		}
 	}
 	&__title {
 		font-weight: 700;
@@ -51,6 +73,9 @@
 			line-height: 36px;
 			text-align: center;
 			margin-top: 15px;
+		}
+		&-message {
+			margin: 0px;
 		}
 	}
 	&__wrapper-input {
