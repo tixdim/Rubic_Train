@@ -34,6 +34,7 @@ export default {
 			let splitTimeOtjimaniy = userTimeOtjimaniy.split(':');
 			let secondsTimeOtjimaniy = (splitTimeOtjimaniy[0]) * 3600 + (splitTimeOtjimaniy[1]) * 60;
 			sessionStorage.setItem('secondsTimeOtjimaniy', secondsTimeOtjimaniy);
+			sessionStorage.setItem('itog_time', secondsTimeOtjimaniy);
 		},
 		closePopup() {
 			this.$emit('closePopup')

@@ -1,7 +1,7 @@
 <template>
 <div class="popup popup_new-card">
 	<div class="popup__content">
-		<form action="/new-card" class="popup__body" method="GET">
+		<div class="popup__body" method="GET">
 			<div class="popup__items">
 				<div class="popup__title">Добавить тренировку</div>
 				<div class="popup__wrapper-input">
@@ -23,7 +23,7 @@
 				<span></span>
 				<span></span>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
 </template>
@@ -33,14 +33,59 @@ export default {
 	name: 'popupCard',
 	methods: {
 		userTime() {
-			let userNameTren = document.querySelector("._tren").value;
-			sessionStorage.setItem('userNameTren', userNameTren);
-			let userTime = document.querySelector("._time").value;
-			let splitTime = userTime.split(':');
-			let secondsTime = (+splitTime[0]) * 3600 + (+splitTime[1]) * 60;
-			sessionStorage.setItem('secondsTime', secondsTime);
-			sessionStorage.setItem('itog_time', secondsTime);
-		},
+            let userTime = document.querySelector("._time").value;
+            let userNameTren = document.querySelector("._tren").value;
+			let nice_ans = 0;
+
+            if (userNameTren == "" || userNameTren.length == 0) {
+
+                let inputs = document.querySelector('._tren');
+                function input_focus_add(input) {
+                    input.classList.add('_focus');
+                    input.parentElement.classList.add('_focus');
+                }
+                input_focus_add(inputs); 
+
+            } else if(userNameTren != "" && userNameTren.length != 0) {
+
+                let inputs = document.querySelector('._tren');
+                function input_focus_remove(input) {
+                    input.classList.remove('_focus');
+                    input.parentElement.classList.remove('_focus');
+                }
+                input_focus_remove(inputs);
+				nice_ans += 1;
+
+            } 
+			if (userTime == "" || userTime.length == 0 || userTime == "00:00") {
+
+				let inputs = document.querySelector('._time');
+                function input_focus_add(input) {
+                    input.classList.add('_focus');
+                    input.parentElement.classList.add('_focus');
+                }
+                input_focus_add(inputs);
+
+			} else if (userTime != "" && userTime.length != 0 && userTime != "00:00") {
+
+				let inputs = document.querySelector('._time');
+                function input_focus_remove(input) {
+                    input.classList.remove('_focus');
+                    input.parentElement.classList.remove('_focus');
+                }
+                input_focus_remove(inputs);
+				nice_ans += 1;
+
+			} 
+			if (nice_ans == 2) {
+                sessionStorage.setItem('userNameTren', userNameTren);
+                let splitTime = userTime.split(':');
+                let secondsTime = (+splitTime[0]) * 3600 + (+splitTime[1]) * 60;
+                sessionStorage.setItem('secondsTime', secondsTime);
+                sessionStorage.setItem('itog_time', secondsTime);
+                window.location.href = '/new-card';
+            }
+        },
 		closePopup() {
 			this.$emit('closePopup');
 		},

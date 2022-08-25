@@ -34,6 +34,7 @@ export default {
 			let splitTimeNaNogi = userTimeNaNogi.split(':');
 			let secondsTimeNaNogi = (+splitTimeNaNogi[0]) * 3600 + (+splitTimeNaNogi[1]) * 60;
 			sessionStorage.setItem('secondsTimeNaNogi', secondsTimeNaNogi);
+			sessionStorage.setItem('itog_time', secondsTimeNaNogi);
 		},
 		closePopup() {
 			this.$emit('closePopup')
