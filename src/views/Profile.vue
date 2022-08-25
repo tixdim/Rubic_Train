@@ -221,19 +221,20 @@ export default {
 			name: "",
 			surname: "",
 			dateRegistration: "",
-			avatarUrl: 0,
+			avatarUrl: 1,
 			countTrain: 0
 		}
 	},
 	created() {
-		this.id = localStorage.getItem("id")
-		this.email = localStorage.getItem("email")
-		this.nickname = localStorage.getItem("nickname")
-		this.isBoy = localStorage.getItem("isBoy")
-		this.name = localStorage.getItem("name")
-		this.surname = localStorage.getItem("surname")
-		this.dateRegistration = localStorage.getItem("dateRegistration")
-		this.avatarUrl = localStorage.getItem("avatarUrl")
+		this.id = localStorage.getItem("id");
+		this.email = localStorage.getItem("email");
+		this.nickname = localStorage.getItem("nickname");
+		this.isBoy = localStorage.getItem("isBoy");
+		this.name = localStorage.getItem("name");
+		this.surname = localStorage.getItem("surname");
+		this.dateRegistration = localStorage.getItem("dateRegistration");
+		this.avatarUrl = localStorage.getItem("avatarUrl");
+		console.log(this.avatarUrl);
 	},
 
 	async mounted() {
