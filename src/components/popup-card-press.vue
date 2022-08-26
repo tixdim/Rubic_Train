@@ -11,9 +11,9 @@
 						<div class="popup__button popup__close" @click="closePopup">
 							<div class="popup__close">Отмена</div>
 						</div>
-						<button type="submit" class="popup__button _btn-time-press" v-on:click="TimePress">
+						<a class="popup__button _btn-time-press" v-on:click="TimePress">
 							<div class="popup__text-btn">Добавить</div>
-						</button>
+						</a>
 					</div>
 				</div>
 				<div class="popup__cross" @click="closePopup">
@@ -58,7 +58,9 @@ export default {
 				let secondsTimePress = (+splitTimePress[0]) * 3600 + (+splitTimePress[1]) * 60;
 				sessionStorage.setItem('secondsTimePress', secondsTimePress);
 				sessionStorage.setItem('itog_time', secondsTimePress);
-				window.location.href = '/card-press';
+				sessionStorage.setItem('flagTren', 5);
+				this.$emit('closePopup');
+				window.location.href = '/main-page';
 			}
 		},
 		closePopup() {

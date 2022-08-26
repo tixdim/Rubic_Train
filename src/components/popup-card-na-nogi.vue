@@ -11,9 +11,9 @@
 						<div class="popup__button popup__close" @click="closePopup">
 							<div class="popup__close">Отмена</div>
 						</div>
-						<button type="submit" class="popup__button _btn-time-na-nogi" v-on:click="TimeNaNogi">
+						<a class="popup__button _btn-time-na-nogi" v-on:click="TimeNaNogi">
 							<div class="popup__text-btn">Добавить</div>
-						</button>
+						</a>
 					</div>
 				</div>
 				<div class="popup__cross" @click="closePopup">
@@ -58,7 +58,9 @@ export default {
 				let secondsTimeNaNogi = (+splitTimeNaNogi[0]) * 3600 + (+splitTimeNaNogi[1]) * 60;
 				sessionStorage.setItem('secondsTimeNaNogi', secondsTimeNaNogi);
 				sessionStorage.setItem('itog_time', secondsTimeNaNogi);
-				window.location.href = '/card-na-nogi';
+				sessionStorage.setItem('flagTren', 2);
+				this.$emit('closePopup');
+				window.location.href = '/main-page';
 			}
 		},
 		closePopup() {

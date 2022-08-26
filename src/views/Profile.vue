@@ -8,38 +8,47 @@
 						<div class="profile__item-box">
 							<div class="profile__info-box">
 								<button v-if="avatarUrl == 1" class="profile__img profile__img-main" @click="openPopupProfile">
-                                    <img src="../assets/img/homepage/ava-1.png" alt="">
-                                </button>
-                                <button v-else-if="avatarUrl == 2" class="profile__img profile__img-main" @click="openPopupProfile">
-                                    <img src="../assets/img/homepage/ava-2.png" alt="">
-                                </button>
-                                <button v-else-if="avatarUrl == 3" class="profile__img profile__img-main" @click="openPopupProfile">
-                                    <img src="../assets/img/homepage/ava-3.png" alt="">
-                                </button>
-                                <button v-else-if="avatarUrl == 4" class="profile__img profile__img-main" @click="openPopupProfile">
-                                    <img src="../assets/img/homepage/ava-4.png" alt="">
-                                </button>
-                                <button v-else-if="avatarUrl == 5" class="profile__img profile__img-main" @click="openPopupProfile">
-                                    <img src="../assets/img/homepage/ava-5.png" alt="">
-                                </button>
-								<div class="profile__box-name">
-									<div class="profile__name"> {{name}} </div>
-									<div class="profile__surname"> {{surname}} </div>
-								</div>
-								<div class="profile__username"> {{nickname}} </div>
-								<div class="profile__email"> {{email}} </div>
-								<div class="profile__button-box">
-									<router-link to="/edit-profile" class="profile__edit">
-										<div class="profile__edit-txt">Редактировать</div>
-									</router-link>
-									<router-link to="/password-profile" class="profile__password-rename">
-										<div class="profile__password-rename-txt">Сменить пароль</div>
-									</router-link>
-								</div>
-								<div class="profile__button-box">
-									<router-link to="/main-page" class="profile__edit">
-										<div class="profile__edit-txt">Добавить тренировку</div>
-									</router-link>
+									<img src="../assets/img/homepage/ava-1.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl == 2" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-2.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl == 3" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-3.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl == 4" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-4.png" alt="">
+								</button>
+								<button v-else-if="avatarUrl == 5" class="profile__img profile__img-main" @click="openPopupProfile">
+									<img src="../assets/img/homepage/ava-5.png" alt="">
+								</button>
+								<div class="profile__box-total">
+									<div class="profile__box-top">
+										<div class="profile__box-title">
+											<div class="profile__box-name">
+												<div class="profile__name"> {{ name }} </div>
+												<div class="profile__surname"> {{ surname }} </div>
+											</div>
+											<div class="profile__username"> {{ nickname }} </div>
+											<div class="profile__email"> {{ email }} </div>
+										</div>
+										<div class="profile__button-box">
+											<router-link to="/edit-profile" class="profile__edit">
+												<div class="profile__edit-txt">Редактировать</div>
+											</router-link>
+											<router-link to="/password-profile" class="profile__password-rename">
+												<div class="profile__password-rename-txt">Сменить пароль</div>
+											</router-link>
+										</div>
+									</div>
+									<div class="profile__button-bottom">
+										<button class="profile__train" @click="add_tren">
+											<div class="profile__train-txt">Добавить тренировку</div>
+										</button>
+										<button class="profile__train" @click="delete_all_tren">
+											<div class="profile__train-txt">Удалить все тернировки</div>
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -324,8 +333,16 @@ export default {
 	},
 
 	methods: {
+		async delete_all_tren() {
+			await axios
+    			.delete('http://localhost:63002/api/Workouts/DeleteAllWorkoutPlan/' + this.id)
+				.catch(error => {
+        			console.log(error["response"]["data"]);
+      			});
+			window.location.href = '/profile';
+		},
 		async add_tren() {
-			sessionStorage.setItem('flagTren', false);
+			sessionStorage.setItem('flagTren', 0);
 			window.location.href = '/main-page';
 		},
 		async deletTrain() {

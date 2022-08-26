@@ -14,7 +14,7 @@
 						<div class="popup__button popup__close" @click="closePopup">
 							<div class="popup__close">Отмена</div>
 						</div>
-						<a href="/main-page" class="popup__button _btn-time" v-on:click="userTime">
+						<a class="popup__button _btn-time" v-on:click="userTime">
 							<div class="popup__text-btn">Добавить</div>
 						</a>
 					</div>
@@ -83,9 +83,9 @@ export default {
 				let secondsTime = (+splitTime[0]) * 3600 + (+splitTime[1]) * 60;
 				sessionStorage.setItem('secondsTime', secondsTime);
 				sessionStorage.setItem('itog_time', secondsTime);
-				sessionStorage.setItem('flagTren', true);
+				sessionStorage.setItem('flagTren', 1);
 				this.$emit('closePopup');
-				//window.location.href = '/new-card';
+				window.location.href = '/main-page';
 			}
 		},
 		closePopup() {

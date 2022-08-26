@@ -11,9 +11,9 @@
 						<div class="popup__button popup__close" @click="closePopup">
 							<div class="popup__close">Отмена</div>
 						</div>
-						<button type="submit" class="popup__button _btn-time-otjimaniy" v-on:click="TimeOtjimaniy">
+						<a class="popup__button _btn-time-otjimaniy" v-on:click="TimeOtjimaniy">
 							<div class="popup__text-btn">Добавить</div>
-						</button>
+						</a>
 					</div>
 				</div>
 				<div class="popup__cross" @click="closePopup">
@@ -58,7 +58,9 @@ export default {
 				let secondsTimeOtjimaniy = (splitTimeOtjimaniy[0]) * 3600 + (splitTimeOtjimaniy[1]) * 60;
 				sessionStorage.setItem('secondsTimeOtjimaniy', secondsTimeOtjimaniy);
 				sessionStorage.setItem('itog_time', secondsTimeOtjimaniy);
-				window.location.href = '/card-otjimaniy';
+				sessionStorage.setItem('flagTren', 3);
+				this.$emit('closePopup');
+				window.location.href = '/main-page';
 			}
 		},
 		closePopup() {
