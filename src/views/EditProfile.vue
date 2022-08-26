@@ -75,7 +75,6 @@ export default {
 				localStorage.setItem("surname", this.info["data"]["surname"])
 				localStorage.setItem("id", this.info["data"]["id"])
 				localStorage.setItem("dateRegistration", this.info["data"]["dateRegistration"])
-				localStorage.setItem("avatarUrl", this.info["data"]["avatarUrl"])
 				window.location.href = '/profile';
 			}
 			else {
