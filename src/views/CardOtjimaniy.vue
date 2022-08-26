@@ -53,12 +53,15 @@ export default {
 
 	data() {
 		return {
-			info: null
+			info: null,
+			start_time: 0
 		}
 	},
 	mounted() {
+		this.start_time = parseInt(sessionStorage.getItem('itog_time'));
 		let time = sessionStorage.getItem('secondsTimeOtjimaniy');
 		const countDown = document.querySelector("._timer");
+		let time_1 = this.start_time;
 		function updateCountDown() {
 			let hours = Math.floor(time / 60 / 60);
 			let minutes = Math.floor((time / 60) % 60);
@@ -68,18 +71,19 @@ export default {
 			countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 			time--;
 			sessionStorage.setItem('secondsTimeOtjimaniy', time);
+			
 			if(hours=="0"){
 				countDown.innerHTML = `${minutes}:${secondsNull}`;
 			};
-			if(time=="-1") {
+
+			if(parseInt(time) <= -1) {
 				async function sendButtonTrueTrainOtg() {
 					await axios
     					.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 							userWhoTrainingId: parseInt(localStorage.getItem("id")),
   							exercise: "отжимания",
 							isDone: true,
-							workoutTime: "2022-06-02T20:36:39.646Z",
-  							startWorkoutDate: "2022-06-02T20:36:39.646Z"
+							workoutTime: time_1
 						})
 
 					window.location.href = '/profile';
@@ -99,8 +103,7 @@ export default {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
   					exercise: "отжимания",
 					isDone: false,
-					workoutTime: "2022-05-31T20:27:47.312Z",
-  					startWorkoutDate: "2022-05-31T20:27:47.312Z"
+					workoutTime: this.start_time
 				})
     			.then((response) => (this.info = response))
 				.catch(error => {

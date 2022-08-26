@@ -1,7 +1,7 @@
 <template>
 	<div class="popup popup_new-card">
 		<div class="popup__content">
-			<div class="popup__body" method="GET">
+			<div class="popup__body">
 				<div class="popup__items">
 					<div class="popup__title">Добавить тренировку</div>
 					<div class="popup__wrapper-input">

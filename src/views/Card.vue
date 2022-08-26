@@ -55,7 +55,7 @@ export default {
 	data() {
 		return {
 			info: null,
-			start_time: 0,
+			start_time: 0
 		}
 	},
 	mounted() {
@@ -92,7 +92,6 @@ export default {
 				}
 
 				sendButtonTrueTrain();
-
 			}
 		}
 		updateCountDown();
@@ -102,19 +101,18 @@ export default {
 	methods: {
 		async sendButtonFalseTrain() {
 			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: sessionStorage.getItem('userNameTren'),
+  					exercise: sessionStorage.getItem('userNameTren'),
 					isDone: false,
 					workoutTime: this.start_time
 				})
-				.then((response) => (this.info = response))
+    			.then((response) => (this.info = response))
 				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
+        			console.log(error["response"]["data"]);
+      			});
 
 			if (this.info["status"] == 201) {
-				sessionStorage.setItem('secondsTime', "-1");
 				window.location.href = '/profile';
 			}
 			else {
