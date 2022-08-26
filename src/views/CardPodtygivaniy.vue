@@ -53,7 +53,8 @@ export default {
 
 	data() {
 		return {
-			info: null
+			info: null,
+			start_time: 0
 		}
 	},
 	mounted() {

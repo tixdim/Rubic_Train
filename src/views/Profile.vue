@@ -7,21 +7,21 @@
 					<div class="profile__items">
 						<div class="profile__item-box">
 							<div class="profile__info-box">
-								<button v-if="avatarUrl === 1" class="profile__img profile__img-main" @click="openPopupProfile">
-									<img src="../assets/img/homepage/ava-1.png" alt="">
-								</button>
-								<button v-else-if="avatarUrl === 2" class="profile__img profile__img-main" @click="openPopupProfile">
-									<img src="../assets/img/homepage/ava-2.png" alt="">
-								</button>
-								<button v-else-if="avatarUrl === 3" class="profile__img profile__img-main" @click="openPopupProfile">
-									<img src="../assets/img/homepage/ava-3.png" alt="">
-								</button>
-								<button v-else-if="avatarUrl === 4" class="profile__img profile__img-main" @click="openPopupProfile">
-									<img src="../assets/img/homepage/ava-4.png" alt="">
-								</button>
-								<button v-else-if="avatarUrl === 5" class="profile__img profile__img-main" @click="openPopupProfile">
-									<img src="../assets/img/homepage/ava-5.png" alt="">
-								</button>
+								<button v-if="avatarUrl == 1" class="profile__img profile__img-main" @click="openPopupProfile">
+                                    <img src="../assets/img/homepage/ava-1.png" alt="">
+                                </button>
+                                <button v-else-if="avatarUrl == 2" class="profile__img profile__img-main" @click="openPopupProfile">
+                                    <img src="../assets/img/homepage/ava-2.png" alt="">
+                                </button>
+                                <button v-else-if="avatarUrl == 3" class="profile__img profile__img-main" @click="openPopupProfile">
+                                    <img src="../assets/img/homepage/ava-3.png" alt="">
+                                </button>
+                                <button v-else-if="avatarUrl == 4" class="profile__img profile__img-main" @click="openPopupProfile">
+                                    <img src="../assets/img/homepage/ava-4.png" alt="">
+                                </button>
+                                <button v-else-if="avatarUrl == 5" class="profile__img profile__img-main" @click="openPopupProfile">
+                                    <img src="../assets/img/homepage/ava-5.png" alt="">
+                                </button>
 								<div class="profile__box-name">
 									<div class="profile__name"> {{name}} </div>
 									<div class="profile__surname"> {{surname}} </div>
@@ -150,41 +150,100 @@
 				<div class="popup__content">
 					<div class="popup__body popup__body-profile">
 						<div class="popup__items popup__items-profile">
-							<button class="profile__img profile__img-active">
-								<img src="../assets/img/homepage/ava-1.png" alt="">
-								<div class="profile__img-check">
-									<div class="profile__img-stick-1"></div>
-									<div class="profile__img-stick-2"></div>
-								</div>
-							</button>
-							<button class="profile__img">
-								<img src="../assets/img/homepage/ava-2.png" alt="">
-								<div class="profile__img-check">
-									<div class="profile__img-stick-1"></div>
-									<div class="profile__img-stick-2"></div>
-								</div>
-							</button>
-							<button class="profile__img profile__img-active">
-								<img src="../assets/img/homepage/ava-3.png" alt="">
-								<div class="profile__img-check">
-									<div class="profile__img-stick-1"></div>
-									<div class="profile__img-stick-2"></div>
-								</div>
-							</button>
-							<button class="profile__img">
-								<img src="../assets/img/homepage/ava-4.png" alt="">
-								<div class="profile__img-check">
-									<div class="profile__img-stick-1"></div>
-									<div class="profile__img-stick-2"></div>
-								</div>
-							</button>
-							<button class="profile__img">
-								<img src="../assets/img/homepage/ava-5.png" alt="">
-								<div class="profile__img-check">
-									<div class="profile__img-stick-1"></div>
-									<div class="profile__img-stick-2"></div>
-								</div>
-							</button>
+							<div v-if="avatarUrl == 1" @closePopup="closePopup">
+								<button class="profile__img profile__img-active" @click="change_img1">
+									<img src="../assets/img/homepage/ava-1.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+							<div v-else  @closePopup="closePopup">
+								<button class="profile__img" @click="change_img1">
+									<img src="../assets/img/homepage/ava-1.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+
+							<div v-if="avatarUrl == 2" @closePopup="closePopup">
+								<button class="profile__img profile__img-active" @click="change_img2">
+									<img src="../assets/img/homepage/ava-2.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+							<div v-else @closePopup="closePopup">
+								<button class="profile__img" @click="change_img2">
+									<img src="../assets/img/homepage/ava-2.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+
+							<div v-if="avatarUrl == 3" @closePopup="closePopup">
+								<button class="profile__img profile__img-active" @click="change_img3">
+									<img src="../assets/img/homepage/ava-3.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+							<div v-else @closePopup="closePopup">
+								<button class="profile__img" @click="change_img3">
+									<img src="../assets/img/homepage/ava-3.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+
+							<div v-if="avatarUrl == 4" @closePopup="closePopup">
+								<button class="profile__img profile__img-active" @click="change_img4">
+									<img src="../assets/img/homepage/ava-4.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+							<div v-else @closePopup="closePopup">
+								<button class="profile__img" @click="change_img4">
+									<img src="../assets/img/homepage/ava-4.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+
+							<div v-if="avatarUrl == 5" @closePopup="closePopup">
+								<button class="profile__img profile__img-active" @click="change_img5">
+									<img src="../assets/img/homepage/ava-5.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
+							<div v-else @closePopup="closePopup">
+								<button class="profile__img" @click="change_img5">
+									<img src="../assets/img/homepage/ava-5.png" alt="">
+									<div class="profile__img-check">
+										<div class="profile__img-stick-1"></div>
+										<div class="profile__img-stick-2"></div>
+									</div>
+								</button>
+							</div>
 						</div>
 						<div class="popup__cross" @click="closePopup">
 							<span></span>
@@ -221,7 +280,7 @@ export default {
 			name: "",
 			surname: "",
 			dateRegistration: "",
-			avatarUrl: 1,
+			avatarUrl: 0,
 			countTrain: 0
 		}
 	},
@@ -234,7 +293,6 @@ export default {
 		this.surname = localStorage.getItem("surname");
 		this.dateRegistration = localStorage.getItem("dateRegistration");
 		this.avatarUrl = localStorage.getItem("avatarUrl");
-		console.log(this.avatarUrl);
 	},
 
 	async mounted() {
@@ -255,7 +313,7 @@ export default {
 
 	methods: {
 		async deletTrain() {
-			сonsole.log(this.info);
+			console.log(this.info);
     	},
 		openPopupProfile() {
 			this.isPopupProfile = true;
@@ -270,6 +328,31 @@ export default {
 				document.documentElement.style.overflow = 'auto'
 				return
 			}
+		},
+		change_img1() {
+			this.avatarUrl = 1;
+			localStorage.setItem("avatarUrl", this.avatarUrl)
+			this.closePopup();
+		},
+		change_img2() {
+			this.avatarUrl = 2;
+			localStorage.setItem("avatarUrl", this.avatarUrl)
+			this.closePopup();
+		},
+		change_img3() {
+			this.avatarUrl = 3;
+			localStorage.setItem("avatarUrl", this.avatarUrl)
+			this.closePopup();
+		},
+		change_img4() {
+			this.avatarUrl = 4;
+			localStorage.setItem("avatarUrl", this.avatarUrl)
+			this.closePopup();
+		},
+		change_img5() {
+			this.avatarUrl = 5;
+			localStorage.setItem("avatarUrl", this.avatarUrl)
+			this.closePopup();	
 		}
 	}
 }

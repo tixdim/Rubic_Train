@@ -55,10 +55,12 @@ export default {
 		return {
 			info: null,
 			start_time: 0,
+			end_tren: "false"
 		}
 	},
 	mounted() {
 		this.start_time = parseInt(sessionStorage.getItem('itog_time'));
+		this.end_tren = sessionStorage.getItem('end_tren');
 		let userNameTren = sessionStorage.getItem('userNameTren');
 		document.querySelector("._title-card").innerHTML = `Тренировка ${userNameTren}`;
 		let time = sessionStorage.getItem('secondsTime');
@@ -90,7 +92,10 @@ export default {
 					window.location.href = '/profile';
     			}
 
-				sendButtonTrueTrain();
+				if (sessionStorage.getItem('end_tren') === false) {
+					sendButtonTrueTrain();
+					sessionStorage.setItem('end_tren', true);
+				}
 				
 			}
 		}
@@ -100,24 +105,27 @@ export default {
 
 	methods: {
 		async sendButtonFalseTrain() {
-			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: sessionStorage.getItem('userNameTren'),
-					isDone: false,
-					workoutTime: this.start_time
-				})
-    			.then((response) => (this.info = response))
-				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+			if (this.end_tren == "false") {
+				sessionStorage.setItem('end_tren', "true");
+				await axios
+    				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+						userWhoTrainingId: parseInt(localStorage.getItem("id")),
+  						exercise: sessionStorage.getItem('userNameTren'),
+						isDone: false,
+						workoutTime: this.start_time
+					})
+    				.then((response) => (this.info = response))
+					.catch(error => {
+        				console.log(error["response"]["data"]);
+      				});
 
-			if (this.info["status"] == 201) {
-				sessionStorage.setItem('secondsTime', "-1");
-				window.location.href = '/profile';
-			}
-			else {
-				console.log(this.info)
+				if (this.info["status"] == 201) {
+					sessionStorage.setItem('end_tren', true);
+					window.location.href = '/profile';
+				}
+				else {
+					console.log(this.info)
+				}
 			}
     	}
 	}
