@@ -32,21 +32,21 @@
 											<div class="profile__username"> {{ nickname }} </div>
 											<div class="profile__email"> {{ email }} </div>
 										</div>
-										<div class="profile__button-box">
-											<router-link to="/edit-profile" class="profile__edit">
-												<div class="profile__edit-txt">Редактировать</div>
-											</router-link>
-											<router-link to="/password-profile" class="profile__password-rename">
-												<div class="profile__password-rename-txt">Сменить пароль</div>
-											</router-link>
-										</div>
+									</div>
+									<div class="profile__button-top">
+										<router-link to="/edit-profile" class="profile__edit">
+											<div class="profile__edit-txt">Редактировать</div>
+										</router-link>
+										<router-link to="/password-profile" class="profile__password-rename">
+											<div class="profile__password-rename-txt">Сменить пароль</div>
+										</router-link>
 									</div>
 									<div class="profile__button-bottom">
 										<button class="profile__train" @click="add_tren">
 											<div class="profile__train-txt">Добавить тренировку</div>
 										</button>
 										<button class="profile__train">
-											<div class="profile__train-txt">Удалить все тернировки</div>
+											<div class="profile__train-txt">Удалить все тренировки</div>
 										</button>
 									</div>
 								</div>

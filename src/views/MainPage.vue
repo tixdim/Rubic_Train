@@ -2,7 +2,7 @@
 	<div class="wrapper" v-on:keyup.escape="closePopup">
 		<header-components/>
 		<main class="page">
-			<div v-if="isOpen == 'false'" class="main-page">
+			<div v-if="isOpen == '0'" class="main-page">
 				<div class="main-page__container _container">
 					<div class="main-page__items">
 						<div class="main-page__title-card">Создать тренировку</div>
@@ -63,7 +63,10 @@
 									</div>
 								</div>
 							</button>
-							<button class="main-page__new-card" @click="openPopup">
+							<button class="main-page__card main-page-card__new" @click="openPopup">
+								<div class="main-page-card__bg">
+									<img src="../assets/img/homepage/tren.jpg" alt="">
+								</div>
 								<div class="main-page__plus-title">Добавить тренировку</div>
 								<div class="main-page__box-plus">
 									<div class="main-page__plus">
