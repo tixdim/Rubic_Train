@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<header-components/>
+		<header-components />
 		<main class="page">
 			<div class="profile">
 				<div class="profile__container _container">
@@ -68,7 +68,11 @@
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: <span>{{train.startWorkoutDate.split('-')[2].split("T")[0]}}.{{ train.startWorkoutDate.split('-')[1]}}.{{ train.startWorkoutDate.split('-')[0] }}</span></div>
+													<div class="profile-card__sub-title">Добавлено:
+														<span>{{ train.startWorkoutDate.split('-')[2].split("T")[0] }}.{{
+																train.startWorkoutDate.split('-')[1]
+														}}.{{ train.startWorkoutDate.split('-')[0] }}</span>
+													</div>
 													<div class="profile-card__box-cross">
 														<a @click="deletTrain" class="profile-card__cross">
 															<span></span>
@@ -80,11 +84,13 @@
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Длительность тренировки:</div>
-														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
-														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) || 
-														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) || 
-														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
-														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут	 </div>
+														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)"
+															class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
+														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) ||
+														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) ||
+														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)"
+															class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
+														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут </div>
 													</div>
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Статус тренировки:</div>
@@ -112,16 +118,22 @@
 											<div class="profile-card__box-items">
 												<div class="profile-card__box-title">
 													<div class="profile-card__title">Тренировка {{ train.exercise }}</div>
-													<div class="profile-card__sub-title">Добавлено: <span>{{train.startWorkoutDate.split('-')[2].split("T")[0]}}.{{ train.startWorkoutDate.split('-')[1]}}.{{ train.startWorkoutDate.split('-')[0] }}</span></div>
+													<div class="profile-card__sub-title">Добавлено:
+														<span>{{ train.startWorkoutDate.split('-')[2].split("T")[0] }}.{{
+																train.startWorkoutDate.split('-')[1]
+														}}.{{ train.startWorkoutDate.split('-')[0] }}</span>
+													</div>
 												</div>
 												<div class="profile-card__info">
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Длительность тренировки:</div>
-														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
-														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) || 
-														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) || 
-														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)" class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
-														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут	 </div>
+														<div v-if="((train.workoutTime / 60) % 10 === 1) && ((train.workoutTime / 60) % 100 != 11)"
+															class="profile-card__info-text"> {{ train.workoutTime / 60 }} минута </div>
+														<div v-else-if="(train.workoutTime / 60 === 2 && (train.workoutTime / 60) % 100 != 12) ||
+														((train.workoutTime / 60) % 10 === 3 && (train.workoutTime / 60) % 100 != 13) ||
+														((train.workoutTime / 60) % 10 === 4 && (train.workoutTime / 60) % 100 != 14)"
+															class="profile-card__info-text"> {{ train.workoutTime / 60 }} минуты </div>
+														<div v-else class="profile-card__info-text"> {{ train.workoutTime / 60 }} минут </div>
 													</div>
 													<div class="profile-card__info-box">
 														<div class="profile-card__info-title">Статус тренировки:</div>
@@ -159,7 +171,7 @@
 									</div>
 								</button>
 							</div>
-							<div v-else  @closePopup="closePopup">
+							<div v-else @closePopup="closePopup">
 								<button class="profile__img" @click="change_img1">
 									<img src="../assets/img/homepage/ava-1.png" alt="">
 									<div class="profile__img-check">
@@ -253,7 +265,7 @@
 				</div>
 			</div>
 		</transition>
-		<footer-components/>
+		<footer-components />
 	</div>
 </template>
 
@@ -307,24 +319,28 @@ export default {
 			.get('http://localhost:63002/api/Workouts/GetAllWorkoutPlans/' + this.id + '/' + this.countTrain + '/0')
 			.then((response) => (this.info = response["data"]))
 			.catch(error => {
-        		console.log(error["response"]["data"]);
-      		});
+				console.log(error["response"]["data"]);
+			});
 	},
 
 	methods: {
+		async add_tren() {
+			sessionStorage.setItem('flagTren', false);
+			window.location.href = '/main-page';
+		},
 		async deletTrain() {
 			console.log(this.info);
-    	},
+		},
 		openPopupProfile() {
 			this.isPopupProfile = true;
-			if(this.openPopupProfile){
+			if (this.openPopupProfile) {
 				document.documentElement.style.overflow = 'hidden'
 				return
 			}
 		},
 		closePopup() {
 			this.isPopupProfile = false;
-			if(this.closePopup){
+			if (this.closePopup) {
 				document.documentElement.style.overflow = 'auto'
 				return
 			}
@@ -352,7 +368,7 @@ export default {
 		change_img5() {
 			this.avatarUrl = 5;
 			localStorage.setItem("avatarUrl", this.avatarUrl)
-			this.closePopup();	
+			this.closePopup();
 		}
 	}
 }

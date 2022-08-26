@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<header-card-components/>
+		<header-card-components />
 		<main class="page">
 			<div class="card-page">
 				<div class="card-page__container _container">
@@ -21,7 +21,8 @@
 									</div>
 									<div class="card-page-card__info">
 										<div class="card-page-card__info-title">Цитата:</div>
-										<div class="card-page-card__info-text">Разум всегда сдается первым, не тело. Секрет в том, чтобы заставить твой разум работать на тебя, а не против тебя.</div>
+										<div class="card-page-card__info-text">Разум всегда сдается первым, не тело. Секрет в том, чтобы
+											заставить твой разум работать на тебя, а не против тебя.</div>
 									</div>
 								</div>
 							</div>
@@ -35,7 +36,7 @@
 				</div>
 			</div>
 		</main>
-		<footer-components/>
+		<footer-components />
 	</div>
 </template>
 
@@ -54,13 +55,11 @@ export default {
 	data() {
 		return {
 			info: null,
-			start_time: 0,
-			end_tren: "false"
+			start_time: 0
 		}
 	},
 	mounted() {
 		this.start_time = parseInt(sessionStorage.getItem('itog_time'));
-		this.end_tren = sessionStorage.getItem('end_tren');
 		let userNameTren = sessionStorage.getItem('userNameTren');
 		document.querySelector("._title-card").innerHTML = `Тренировка ${userNameTren}`;
 		let time = sessionStorage.getItem('secondsTime');
@@ -70,33 +69,29 @@ export default {
 			let hours = Math.floor(time / 60 / 60);
 			let minutes = Math.floor((time / 60) % 60);
 			let seconds = time % 60;
-			let minutesNull = minutes < 10 ? "0" + minutes: minutes;
-			let secondsNull = seconds < 10 ? "0" + seconds: seconds;
+			let minutesNull = minutes < 10 ? "0" + minutes : minutes;
+			let secondsNull = seconds < 10 ? "0" + seconds : seconds;
 			countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 			time--;
 			sessionStorage.setItem('secondsTime', time);
-			
-			if(hours=="0"){
+
+			if (hours == "0") {
 				countDown.innerHTML = `${minutes}:${secondsNull}`;
 			};
 
-			if(parseInt(time) <= -1) {
+			if (parseInt(time) <= -1) {
 				async function sendButtonTrueTrain() {
 					await axios
-    					.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+						.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 							userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  							exercise: userNameTren,
+							exercise: userNameTren,
 							isDone: true,
 							workoutTime: time_1
 						})
 					window.location.href = '/profile';
-    			}
-
-				if (sessionStorage.getItem('end_tren') === false) {
-					sendButtonTrueTrain();
-					sessionStorage.setItem('end_tren', true);
 				}
-				
+
+				sendButtonTrueTrain();
 			}
 		}
 		updateCountDown();
@@ -105,29 +100,25 @@ export default {
 
 	methods: {
 		async sendButtonFalseTrain() {
-			if (this.end_tren == "false") {
-				sessionStorage.setItem('end_tren', "true");
-				await axios
-    				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-						userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  						exercise: sessionStorage.getItem('userNameTren'),
-						isDone: false,
-						workoutTime: this.start_time
-					})
-    				.then((response) => (this.info = response))
-					.catch(error => {
-        				console.log(error["response"]["data"]);
-      				});
+			await axios
+    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+					userWhoTrainingId: parseInt(localStorage.getItem("id")),
+  					exercise: sessionStorage.getItem('userNameTren'),
+					isDone: false,
+					workoutTime: this.start_time
+				})
+    			.then((response) => (this.info = response))
+				.catch(error => {
+        			console.log(error["response"]["data"]);
+      			});
 
-				if (this.info["status"] == 201) {
-					sessionStorage.setItem('end_tren', true);
-					window.location.href = '/profile';
-				}
-				else {
-					console.log(this.info)
-				}
+			if (this.info["status"] == 201) {
+				window.location.href = '/profile';
 			}
-    	}
+			else {
+				console.log(this.info)
+			}
+		}
 	}
 }
 </script>

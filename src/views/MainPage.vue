@@ -2,7 +2,7 @@
 	<div class="wrapper" v-on:keyup.escape="closePopup">
 		<header-components/>
 		<main class="page">
-			<div class="main-page">
+			<div v-if="isOpen == 'false'" class="main-page">
 				<div class="main-page__container _container">
 					<div class="main-page__items">
 						<div class="main-page__title-card">Создать тренировку</div>
@@ -76,6 +76,38 @@
 					</div>
 				</div>
 			</div>
+			<div v-else class="card-page">
+				<div class="card-page__container _container">
+					<div class="card-page__items">
+						<div class="card-page__box-card">
+							<div class="card-page__card card-page-card">
+								<div class="card-page-card__bg">
+									<img src="../assets/img/homepage/tren.jpg" alt="">
+								</div>
+								<div class="card-page-card__box-items">
+									<div class="card-page-card__box-title">
+										<div class="card-page-card__title _title-card"></div>
+									</div>
+									<div class="card-page-card__box-timer">
+										<div class="card-page-card__timer">
+											<div class="card-page-card__text-timer _timer"></div>
+										</div>
+									</div>
+									<div class="card-page-card__info">
+										<div class="card-page-card__info-title">Цитата:</div>
+										<div class="card-page-card__info-text">Разум всегда сдается первым, не тело. Секрет в том, чтобы заставить твой разум работать на тебя, а не против тебя.</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-page__form-surrender">
+						<button class="card-page__button-surrender" @click="sendButtonFalseTrain">
+							<div class="card-page__text-surrender">Сдаться</div>
+						</button>
+					</div>
+				</div>
+			</div>
 		</main>
 		<transition name="modal"><popup-card-otjimaniy v-if="isPopupOtjimaniy" @closePopup="closePopup"></popup-card-otjimaniy></transition>
 		<transition name="modal"><popup-card-podtygivaniy v-if="isPopupPodtygivaniy" @closePopup="closePopup"></popup-card-podtygivaniy></transition>
@@ -114,6 +146,7 @@ export default {
 			isPopupPodtygivaniy: false,
 			isPopupPress: false,
 			isPopupNaNogi: false,
+			isOpen: sessionStorage.getItem('flagTren')
 		}
 	},
 	methods: {
@@ -121,6 +154,7 @@ export default {
 			this.isPopup = true;
 			if(this.openPopup){
 				document.documentElement.style.overflow = 'hidden'
+				sessionStorage.setItem('flagTren', false);
 				return
 			}
 		},

@@ -36,7 +36,7 @@
 			max-width: 1000px;
 		}
 		&-profile {
-			max-width: 1200px;
+			max-width: 1150px;
 			@media (max-width: 500px) {
 				padding: 50px;
 			}
@@ -94,8 +94,7 @@
 		line-height: 21px;
 		border: 2px solid #000;
 		color: #000;
-		
-		&._focus  {
+		&._focus {
 			color: #f00;
 			border: 2px solid #f00;
 			&::-webkit-input-placeholder {
