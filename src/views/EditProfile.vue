@@ -42,7 +42,14 @@ export default {
 	},
 
 	created() {
-		if (this.id == "" || this.email == "" || this.nickname == "" || this.isBoy == "" || this.name == "" || this.surname == "" || this.dateRegistration == "" || this.avatarUrl == "") {
+		let id = localStorage.getItem("id");
+		let email = localStorage.getItem("email");
+		let nickname = localStorage.getItem("nickname");
+		let isBoy = localStorage.getItem("isBoy");
+		let name = localStorage.getItem("name");
+		let surname = localStorage.getItem("surname");
+		let dateRegistration = localStorage.getItem("dateRegistration");
+		if (id == "" || email == "" || nickname == "" || isBoy == "" || name == "" || surname == "" || dateRegistration == "") {
 			window.location.href = '/';
 		}
 	},

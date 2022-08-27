@@ -16,7 +16,7 @@
 							<input type="text" placeholder="Логин*" class="registration__input _nickname">
 						</div>
 						<div class="registration__wrapper-input">
-							<input type="email" placeholder="Почта*" title="Введите в это поле ввода свой электронный адрес." class="registration__input _email">
+							<input type="email" pattern="\d [0-9]" placeholder="Почта*" title="Введите в это поле ввода свой электронный адрес." class="registration__input _email">
 						</div>
 						<div class="registration__wrapper-input registration__wrapper-input_password">
 							<input type="password" placeholder="Пароль*" pattern="(.{6,})" title="Пароль должен содержать не менее 6-ти символов." class="registration__input _first-password-pass" v-model="password" v-show="!showPass">
