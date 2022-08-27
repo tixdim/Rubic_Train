@@ -3,7 +3,8 @@
 		<div class="popup__content">
 			<div class="popup__body">
 				<div class="popup__items">
-					<div class="popup__title">Вы уверены, что хотите сдаться?</div>
+					<div class="popup__title">Вы уверены, что хотите вернуться в профиль?</div>
+					<div class="popup__title">*ваша тренировка не сохранится</div>
 					<div class="popup__box-button">
 						<div class="popup__button popup__close" v-on:click="lose">
 							<div class="popup__close">Да</div>
@@ -27,7 +28,8 @@ export default {
 	name: 'popupCard',
 	methods: {
 		lose() {
-			console.log(123);
+			sessionStorage.setItem('flagTren', 0);
+			window.location.href = '/profile';
 		},
 		closePopup() {
 			this.$emit('closePopup');

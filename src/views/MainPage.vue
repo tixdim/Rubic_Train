@@ -1,6 +1,13 @@
 <template>
 	<div class="wrapper" v-on:keyup.escape="closePopup">
-		<header-components />
+		<header class="header">
+			<div class="header__container _container">
+				<div class="header__items">
+					<a @click="perehod_in_prof" class="header__logo">rubicone</a>
+					<button @click="exit" class="header__btn"><div class="header__btn-txt">Выйти</div></button>
+				</div>
+			</div>
+		</header>
 		<main class="page">
 			<div v-if="isOpen == '0'" class="main-page">
 				<div class="main-page__container _container">
@@ -260,11 +267,28 @@
 		<transition name="modal">
 			<popup-card v-if="isPopup" @closePopup="closePopup"></popup-card>
 		</transition>
-		<transition name="modal">
-			<popup-tren-header v-if="isPopupTrenHeader" @closePopup="closePopup"></popup-tren-header>
-		</transition>
+
 		<transition name="modal">
 			<popup-lose v-if="isPopupLose" @closePopup="closePopup"></popup-lose>
+		</transition>
+		<transition name="modal">
+			<popup-lose-na-nogi v-if="isPopupLoseNaNogi" @closePopup="closePopup"></popup-lose-na-nogi>
+		</transition>
+		<transition name="modal">
+			<popup-lose-otjimaniy v-if="isPopupLoseOtjimaniy" @closePopup="closePopup"></popup-lose-otjimaniy>
+		</transition>
+		<transition name="modal">
+			<popup-lose-podtygivaniy v-if="isPopupLosePodtygivaniy" @closePopup="closePopup"></popup-lose-podtygivaniy>
+		</transition>
+		<transition name="modal">
+			<popup-lose-press v-if="isPopupLosePress" @closePopup="closePopup"></popup-lose-press>
+		</transition>
+
+		<transition name="modal">
+			<popup-tren-header-rubic v-if="isPopupTrenHeaderRubic" @closePopup="closePopup"></popup-tren-header-rubic>
+		</transition>
+		<transition name="modal">
+			<popup-tren-header-exit v-if="isPopupTrenHeaderExit" @closePopup="closePopup"></popup-tren-header-exit>
 		</transition>
 		<footer-components />
 	</div>
@@ -274,7 +298,12 @@
 import headerComponents from '../components/header'
 import footerComponents from '../components/footer'
 import popupLose from '../components/popup-lose'
-import popupTrenHeader from '../components/popup-tren-header'
+import popupLoseNaNogi from '../components/popup-lose-na-nogi'
+import popupLoseOtjimaniy from '../components/popup-lose-otjimaniy'
+import popupLosePodtygivaniy from '../components/popup-lose-podtygivaniy'
+import popupLosePress from '../components/popup-lose-press'
+import popupTrenHeaderRubic from '../components/popup-tren-header-rubic'
+import popupTrenHeaderExit from '../components/popup-tren-header-exit'
 import popupCardOtjimaniy from '../components/popup-card-otjimaniy'
 import popupCardPodtygivaniy from '../components/popup-card-podtygivaniy'
 import popupCardPress from '../components/popup-card-press'
@@ -287,8 +316,15 @@ export default {
 	components: {
 		headerComponents,
 		footerComponents,
-		popupTrenHeader,
+		popupTrenHeaderRubic,
+		popupTrenHeaderExit,
+
 		popupLose,
+		popupLoseNaNogi,
+		popupLoseOtjimaniy,
+		popupLosePodtygivaniy,
+		popupLosePress,
+
 		popupCard,
 		popupCardOtjimaniy,
 		popupCardPodtygivaniy,
@@ -301,12 +337,20 @@ export default {
 			info: null,
 			start_time: 0,
 			isPopup: false,
-			isPopupLose: false,
-			isPopupTrenHeader: false,
 			isPopupOtjimaniy: false,
 			isPopupPodtygivaniy: false,
 			isPopupPress: false,
 			isPopupNaNogi: false,
+
+			isPopupLose: false,
+			isPopupLoseNaNogi: false,
+			isPopupLoseOtjimaniy: false,
+			isPopupLosePodtygivaniy: false,
+			isPopupLosePress: false,
+
+			isPopupTrenHeaderRubic: false,
+			isPopupTrenHeaderExit: false,
+
 			isOpen: sessionStorage.getItem('flagTren')
 		}
 	},
@@ -517,109 +561,70 @@ export default {
 	},
 
 	methods: {
-		async sendButtonFalseTrainPress() {
-			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: "пресс",
-					isDone: false,
-					workoutTime: this.start_time
-				})
-				.then((response) => (this.info = response))
-				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
-
-			if (this.info["status"] == 201) {
-				sessionStorage.setItem('flagTren', 0);
-				window.location.href = '/profile';
+		async perehod_in_prof() {
+			if (this.isOpen == "1" || this.isOpen == "2" || this.isOpen == "3" || this.isOpen == "4" || this.isOpen == "5") {
+				this.isPopupTrenHeaderRubic = true;
+				if (this.perehod_in_prof) {
+					document.documentElement.style.overflow = 'hidden'
+					return
+				}
 			}
 			else {
-				console.log(this.info)
+				window.location.href = '/profile';
+			}
+		},
+		async exit() {
+			if (this.isOpen == "1" || this.isOpen == "2" || this.isOpen == "3" || this.isOpen == "4" || this.isOpen == "5") {
+				this.isPopupTrenHeaderExit = true;
+				if (this.exit) {
+					document.documentElement.style.overflow = 'hidden'
+					return
+				}
+			}
+			else {
+				localStorage.setItem("email", "")
+				localStorage.setItem("nickname", "")
+				localStorage.setItem("isBoy", "")
+				localStorage.setItem("name", "")
+				localStorage.setItem("surname", "")
+				localStorage.setItem("id", "")
+				localStorage.setItem("dateRegistration", "")
+				window.location.href = '/';
+			}
+		},
+		async sendButtonFalseTrainPress() {
+			this.isPopupLosePress = true;
+			if (this.sendButtonFalseTrainPress) {
+				document.documentElement.style.overflow = 'hidden'
+				return
 			}
 		},
 		async sendButtonFalseTrainPodt() {
-			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: "подтягивания",
-					isDone: false,
-					workoutTime: this.start_time
-				})
-				.then((response) => (this.info = response))
-				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
-
-			if (this.info["status"] == 201) {
-				sessionStorage.setItem('flagTren', 0);
-				window.location.href = '/profile';
-			}
-			else {
-				console.log(this.info)
+			this.isPopupLosePodtygivaniy = true;
+			if (this.sendButtonFalseTrainPodt) {
+				document.documentElement.style.overflow = 'hidden'
+				return
 			}
 		},
 		async sendButtonFalseTrainOtg() {
-			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: "отжимания",
-					isDone: false,
-					workoutTime: this.start_time
-				})
-				.then((response) => (this.info = response))
-				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
-
-			if (this.info["status"] == 201) {
-				sessionStorage.setItem('flagTren', 0);
-				window.location.href = '/profile';
-			}
-			else {
-				console.log(this.info)
+			this.isPopupLoseOtjimaniy = true;
+			if (this.sendButtonFalseTrainOtg) {
+				document.documentElement.style.overflow = 'hidden'
+				return
 			}
 		},
 		async sendButtonFalseTrainNogi() {
-			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: "на ноги",
-					isDone: false,
-					workoutTime: this.start_time
-				})
-				.then((response) => (this.info = response))
-				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
-
-			if (this.info["status"] == 201) {
-				sessionStorage.setItem('flagTren', 0);
-				window.location.href = '/profile';
-			}
-			else {
-				console.log(this.info)
+			this.isPopupLoseNaNogi = true;
+			if (this.sendButtonFalseTrainNogi) {
+				document.documentElement.style.overflow = 'hidden'
+				return
 			}
 		},
 		async sendButtonFalseTrain() {
-			await axios
-				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
-					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: sessionStorage.getItem('userNameTren'),
-					isDone: false,
-					workoutTime: this.start_time
-				})
-				.then((response) => (this.info = response))
-				.catch(error => {
-					console.log(error["response"]["data"]);
-				});
-
-			if (this.info["status"] == 201) {
-				window.location.href = '/profile';
-				sessionStorage.setItem('flagTren', 0);
-			}
-			else {
-				console.log(this.info)
+			this.isPopupLose = true;
+			if (this.sendButtonFalseTrain) {
+				document.documentElement.style.overflow = 'hidden'
+				return
 			}
 		},
 		openPopup() {
@@ -634,6 +639,7 @@ export default {
 			this.isPopupOtjimaniy = true;
 			if (this.openPopupOtjimaniy) {
 				document.documentElement.style.overflow = 'hidden'
+				sessionStorage.setItem('flagTren', 0);
 				return
 			}
 		},
@@ -641,6 +647,7 @@ export default {
 			this.isPopupPodtygivaniy = true;
 			if (this.openPopupPodtygivaniy) {
 				document.documentElement.style.overflow = 'hidden'
+				sessionStorage.setItem('flagTren', 0);
 				return
 			}
 		},
@@ -648,6 +655,7 @@ export default {
 			this.isPopupPress = true;
 			if (this.openPopupPress) {
 				document.documentElement.style.overflow = 'hidden'
+				sessionStorage.setItem('flagTren', 0);
 				return
 			}
 		},
@@ -655,6 +663,7 @@ export default {
 			this.isPopupNaNogi = true;
 			if (this.openPopupNaNogi) {
 				document.documentElement.style.overflow = 'hidden'
+				sessionStorage.setItem('flagTren', 0);
 				return
 			}
 		},
@@ -664,6 +673,16 @@ export default {
 			this.isPopupPodtygivaniy = false;
 			this.isPopupPress = false;
 			this.isPopupNaNogi = false;
+
+			this.isPopupLose = false;
+			this.isPopupLoseNaNogi = false;
+			this.isPopupLoseOtjimaniy = false;
+			this.isPopupLosePodtygivaniy = false;
+			this.isPopupLosePress = false;
+
+			this.isPopupTrenHeaderRubic = false;
+			this.isPopupTrenHeaderExit = false;
+
 			if (this.closePopup) {
 				document.documentElement.style.overflow = 'auto'
 				return

@@ -33,7 +33,7 @@ export default {
 			await axios
 				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-					exercise: sessionStorage.getItem('userNameTren'),
+					exercise: "на ноги",
 					isDone: false,
 					workoutTime: parseInt(sessionStorage.getItem('itog_time'))
 				})
