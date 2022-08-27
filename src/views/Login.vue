@@ -34,7 +34,6 @@
 						<div class="login__text">У вас нет аккаунта?<router-link to="/registration" class="login__green-txt">
 								Регистрация</router-link>
 						</div>
-						<router-link to="/password" class="login__forgot-password">Забыли пароль?</router-link>
 					</div>
 				</div>
 			</div>

@@ -717,7 +717,6 @@
 	&__button-top {
 		display: flex;
 		margin-top: 40px;
-		margin-left: 5px;
 		gap: 20px;
 		@media (max-width:$md3) {
 			justify-content: space-between;
@@ -731,7 +730,6 @@
 	&__button-bottom {
 		display: flex;
 		margin-top: 20px;
-		margin-left: 5px;
 		gap: 20px;
 		@media (max-width:$md3) {
 			justify-content: space-between;
