@@ -28,7 +28,7 @@
 								</transition>
 							</div>
 						</div>
-						<button type="submit" class="login__button btn" @click="sendButtonAuth">
+						<button class="login__button btn" @click="sendButtonAuth">
 							<div class="btn-txt">Войти</div>
 						</button>
 						<div class="login__text">У вас нет аккаунта?<router-link to="/registration" class="login__green-txt">
@@ -112,8 +112,6 @@ export default {
 						document.documentElement.style.overflow = 'hidden'
 						return
 					}
-					console.log(this.isPopupMessage);
-					console.log(error["response"]["data"]);
 				});
 
 			if (this.info["status"] == 200) {

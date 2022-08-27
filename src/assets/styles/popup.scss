@@ -44,6 +44,9 @@
 				padding: 30px;
 			}
 		}
+		&-tren {
+			max-width: 750px;
+		}
 	}
 	&__items {
 		display: flex;
@@ -62,6 +65,12 @@
 				@include adaptiv-value("padding-left", 115, 10, 0);
 			}
 		}
+		&-tren {
+			align-items: start;
+			@media (max-width:$md4) {
+				align-items: center;
+			}
+		}
 	}
 	&__title {
 		font-weight: 700;
@@ -76,6 +85,16 @@
 		}
 		&-message {
 			margin: 0px;
+		}
+	}
+	&__sub-title {
+		font-weight: 500;
+		font-size: 26px;
+		line-height: 34px;
+		margin-bottom: 10px;
+		text-align: left;
+		@media (max-width:$md4) {
+			text-align: center;
 		}
 	}
 	&__wrapper-input {
@@ -115,6 +134,9 @@
 		@media (max-width: 500px) {
 			flex-wrap: wrap;
 			width: 100%;
+		}
+		&-tren {
+			align-self: center;
 		}
 	}
 	&__button {

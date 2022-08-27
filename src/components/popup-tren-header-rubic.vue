@@ -1,15 +1,15 @@
 <template>
 	<div class="popup popup_new-card">
 		<div class="popup__content">
-			<div class="popup__body">
-				<div class="popup__items">
+			<div class="popup__body popup__body-tren">
+				<div class="popup__items popup__items-tren">
 					<div class="popup__title">Вы уверены, что хотите вернуться в профиль?</div>
-					<div class="popup__title">*ваша тренировка не сохранится</div>
-					<div class="popup__box-button">
+					<div class="popup__sub-title">*ваша тренировка не сохранится</div>
+					<div class="popup__box-button popup__box-button-tren">
 						<div class="popup__button popup__close" v-on:click="lose">
 							<div class="popup__close">Да</div>
 						</div>
-						<a class="popup__button _btn-time" @click="closePopup">
+						<a class="popup__button" @click="closePopup">
 							<div class="popup__text-btn">Нет</div>
 						</a>
 					</div>
