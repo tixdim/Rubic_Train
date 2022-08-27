@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper" v-on:keyup.escape="closePopup">
-		<header-components/>
+		<header-components />
 		<main class="page">
 			<div v-if="isOpen == '0'" class="main-page">
 				<div class="main-page__container _container">
@@ -17,7 +17,8 @@
 									</div>
 									<div class="main-page-card__info">
 										<div class="main-page-card__info-title">Цитата:</div>
-										<div class="main-page-card__info-text">Я отжимаюсь до тех, пор пока не чувствую боль, а затем делаю ещё десять раз!</div>
+										<div class="main-page-card__info-text">Я отжимаюсь до тех, пор пока не чувствую боль, а затем делаю
+											ещё десять раз!</div>
 									</div>
 								</div>
 							</button>
@@ -31,7 +32,8 @@
 									</div>
 									<div class="main-page-card__info">
 										<div class="main-page-card__info-title">Цитата:</div>
-										<div class="main-page-card__info-text">Цель тренировок — подтягивать ослабленное, укреплять тело и шлифовать дух.</div>
+										<div class="main-page-card__info-text">Цель тренировок — подтягивать ослабленное, укреплять тело и
+											шлифовать дух.</div>
 									</div>
 								</div>
 							</button>
@@ -98,7 +100,8 @@
 									</div>
 									<div class="card-page-card__info">
 										<div class="card-page-card__info-title">Цитата:</div>
-										<div class="card-page-card__info-text">Разум всегда сдается первым, не тело. Секрет в том, чтобы заставить твой разум работать на тебя, а не против тебя.</div>
+										<div class="card-page-card__info-text">Разум всегда сдается первым, не тело. Секрет в том, чтобы
+											заставить твой разум работать на тебя, а не против тебя.</div>
 									</div>
 								</div>
 							</div>
@@ -162,7 +165,8 @@
 									</div>
 									<div class="card-page-card__info">
 										<div class="card-page-card__info-title">Цитата:</div>
-										<div class="card-page-card__info-text">Я отжимаюсь до тех, пор пока не чувствую боль, а затем делаю ещё десять раз!</div>
+										<div class="card-page-card__info-text">Я отжимаюсь до тех, пор пока не чувствую боль, а затем делаю
+											ещё десять раз!</div>
 									</div>
 								</div>
 							</div>
@@ -194,7 +198,8 @@
 									</div>
 									<div class="card-page-card__info">
 										<div class="card-page-card__info-title">Цитата:</div>
-										<div class="card-page-card__info-text">Цель тренировок — подтягивать ослабленное, укреплять тело и шлифовать дух.</div>
+										<div class="card-page-card__info-text">Цель тренировок — подтягивать ослабленное, укреплять тело и
+											шлифовать дух.</div>
 									</div>
 								</div>
 							</div>
@@ -240,18 +245,36 @@
 				</div>
 			</div>
 		</main>
-		<transition name="modal"><popup-card-otjimaniy v-if="isPopupOtjimaniy" @closePopup="closePopup"></popup-card-otjimaniy></transition>
-		<transition name="modal"><popup-card-podtygivaniy v-if="isPopupPodtygivaniy" @closePopup="closePopup"></popup-card-podtygivaniy></transition>
-		<transition name="modal"><popup-card-press v-if="isPopupPress" @closePopup="closePopup"></popup-card-press></transition>
-		<transition name="modal"><popup-card-na-nogi v-if="isPopupNaNogi" @closePopup="closePopup"></popup-card-na-nogi></transition>
-		<transition name="modal"><popup-card v-if="isPopup" @closePopup="closePopup"></popup-card></transition>
-		<footer-components/>
+		<transition name="modal">
+			<popup-card-otjimaniy v-if="isPopupOtjimaniy" @closePopup="closePopup"></popup-card-otjimaniy>
+		</transition>
+		<transition name="modal">
+			<popup-card-podtygivaniy v-if="isPopupPodtygivaniy" @closePopup="closePopup"></popup-card-podtygivaniy>
+		</transition>
+		<transition name="modal">
+			<popup-card-press v-if="isPopupPress" @closePopup="closePopup"></popup-card-press>
+		</transition>
+		<transition name="modal">
+			<popup-card-na-nogi v-if="isPopupNaNogi" @closePopup="closePopup"></popup-card-na-nogi>
+		</transition>
+		<transition name="modal">
+			<popup-card v-if="isPopup" @closePopup="closePopup"></popup-card>
+		</transition>
+		<transition name="modal">
+			<popup-tren-header v-if="isPopupTrenHeader" @closePopup="closePopup"></popup-tren-header>
+		</transition>
+		<transition name="modal">
+			<popup-lose v-if="isPopupLose" @closePopup="closePopup"></popup-lose>
+		</transition>
+		<footer-components />
 	</div>
 </template>
 
 <script>
 import headerComponents from '../components/header'
 import footerComponents from '../components/footer'
+import popupLose from '../components/popup-lose'
+import popupTrenHeader from '../components/popup-tren-header'
 import popupCardOtjimaniy from '../components/popup-card-otjimaniy'
 import popupCardPodtygivaniy from '../components/popup-card-podtygivaniy'
 import popupCardPress from '../components/popup-card-press'
@@ -261,9 +284,11 @@ import axios from "axios"
 
 export default {
 	name: 'mainPage',
-		components: {
+	components: {
 		headerComponents,
 		footerComponents,
+		popupTrenHeader,
+		popupLose,
 		popupCard,
 		popupCardOtjimaniy,
 		popupCardPodtygivaniy,
@@ -276,6 +301,8 @@ export default {
 			info: null,
 			start_time: 0,
 			isPopup: false,
+			isPopupLose: false,
+			isPopupTrenHeader: false,
 			isPopupOtjimaniy: false,
 			isPopupPodtygivaniy: false,
 			isPopupPress: false,
@@ -347,28 +374,28 @@ export default {
 				let hours = Math.floor(time / 60 / 60);
 				let minutes = Math.floor((time / 60) % 60);
 				let seconds = time % 60;
-				let minutesNull = minutes < 10 ? "0" + minutes: minutes;
-				let secondsNull = seconds < 10 ? "0" + seconds: seconds;
+				let minutesNull = minutes < 10 ? "0" + minutes : minutes;
+				let secondsNull = seconds < 10 ? "0" + seconds : seconds;
 				countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 				time--;
 				sessionStorage.setItem('secondsTimeNaNogi', time);
 
-				if(hours=="0"){
+				if (hours == "0") {
 					countDown.innerHTML = `${minutes}:${secondsNull}`;
 				};
 
-				if(parseInt(time) <= -1) {
+				if (parseInt(time) <= -1) {
 					async function sendButtonTrueTrainNogi() {
 						await axios
-    						.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+							.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 								userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  								exercise: "на ноги",
+								exercise: "на ноги",
 								isDone: true,
 								workoutTime: time_1
 							})
 						sessionStorage.setItem('flagTren', 0);
 						window.location.href = '/profile';
-    				}
+					}
 					sendButtonTrueTrainNogi();
 				}
 			}
@@ -385,28 +412,28 @@ export default {
 				let hours = Math.floor(time / 60 / 60);
 				let minutes = Math.floor((time / 60) % 60);
 				let seconds = time % 60;
-				let minutesNull = minutes < 10 ? "0" + minutes: minutes;
-				let secondsNull = seconds < 10 ? "0" + seconds: seconds;
+				let minutesNull = minutes < 10 ? "0" + minutes : minutes;
+				let secondsNull = seconds < 10 ? "0" + seconds : seconds;
 				countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 				time--;
 				sessionStorage.setItem('secondsTimeOtjimaniy', time);
 
-				if(hours=="0"){
+				if (hours == "0") {
 					countDown.innerHTML = `${minutes}:${secondsNull}`;
 				};
 
-				if(parseInt(time) <= -1) {
+				if (parseInt(time) <= -1) {
 					async function sendButtonTrueTrainOtg() {
 						await axios
-    						.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+							.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 								userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  								exercise: "отжимания",
+								exercise: "отжимания",
 								isDone: true,
 								workoutTime: time_1
 							})
 						sessionStorage.setItem('flagTren', 0);
 						window.location.href = '/profile';
-    				}
+					}
 					sendButtonTrueTrainOtg();
 				}
 			}
@@ -423,28 +450,28 @@ export default {
 				let hours = Math.floor(time / 60 / 60);
 				let minutes = Math.floor((time / 60) % 60);
 				let seconds = time % 60;
-				let minutesNull = minutes < 10 ? "0" + minutes: minutes;
-				let secondsNull = seconds < 10 ? "0" + seconds: seconds;
+				let minutesNull = minutes < 10 ? "0" + minutes : minutes;
+				let secondsNull = seconds < 10 ? "0" + seconds : seconds;
 				countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 				time--;
 				sessionStorage.setItem('secondsTimePodtygivaniy', time);
 
-				if(hours=="0"){
+				if (hours == "0") {
 					countDown.innerHTML = `${minutes}:${secondsNull}`;
 				};
 
-				if(parseInt(time) <= -1) {
+				if (parseInt(time) <= -1) {
 					async function sendButtonTrueTrainPodt() {
 						await axios
-    						.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+							.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 								userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  								exercise: "подтягивания",
+								exercise: "подтягивания",
 								isDone: true,
 								workoutTime: time_1
 							})
 						sessionStorage.setItem('flagTren', 0);
 						window.location.href = '/profile';
-    				}
+					}
 					sendButtonTrueTrainPodt();
 				}
 			}
@@ -459,28 +486,28 @@ export default {
 				let hours = Math.floor(time / 60 / 60);
 				let minutes = Math.floor((time / 60) % 60);
 				let seconds = time % 60;
-				let minutesNull = minutes < 10 ? "0" + minutes: minutes;
-				let secondsNull = seconds < 10 ? "0" + seconds: seconds;
+				let minutesNull = minutes < 10 ? "0" + minutes : minutes;
+				let secondsNull = seconds < 10 ? "0" + seconds : seconds;
 				countDown.innerHTML = `${hours}:${minutesNull}:${secondsNull}`;
 				time--;
 				sessionStorage.setItem('secondsTimePress', time);
 
-				if(hours=="0"){
+				if (hours == "0") {
 					countDown.innerHTML = `${minutes}:${secondsNull}`;
 				};
 
-				if(parseInt(time) <= -1) {
+				if (parseInt(time) <= -1) {
 					async function sendButtonTrueTrainPress() {
 						await axios
-    						.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+							.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 								userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  								exercise: "пресс",
+								exercise: "пресс",
 								isDone: true,
 								workoutTime: time_1
 							})
 						sessionStorage.setItem('flagTren', 0);
 						window.location.href = '/profile';
-    				}
+					}
 					sendButtonTrueTrainPress();
 				}
 			}
@@ -492,16 +519,16 @@ export default {
 	methods: {
 		async sendButtonFalseTrainPress() {
 			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: "пресс",
+					exercise: "пресс",
 					isDone: false,
 					workoutTime: this.start_time
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				sessionStorage.setItem('flagTren', 0);
@@ -510,19 +537,19 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
 		async sendButtonFalseTrainPodt() {
 			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: "подтягивания",
+					exercise: "подтягивания",
 					isDone: false,
 					workoutTime: this.start_time
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				sessionStorage.setItem('flagTren', 0);
@@ -531,19 +558,19 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
 		async sendButtonFalseTrainOtg() {
 			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: "отжимания",
+					exercise: "отжимания",
 					isDone: false,
 					workoutTime: this.start_time
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				sessionStorage.setItem('flagTren', 0);
@@ -552,19 +579,19 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
 		async sendButtonFalseTrainNogi() {
 			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: "на ноги",
+					exercise: "на ноги",
 					isDone: false,
 					workoutTime: this.start_time
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				sessionStorage.setItem('flagTren', 0);
@@ -573,19 +600,19 @@ export default {
 			else {
 				console.log(this.info)
 			}
-    	},
+		},
 		async sendButtonFalseTrain() {
 			await axios
-    			.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
+				.post('http://localhost:63002/api/Workouts/AddWorkoutPlan/', {
 					userWhoTrainingId: parseInt(localStorage.getItem("id")),
-  					exercise: sessionStorage.getItem('userNameTren'),
+					exercise: sessionStorage.getItem('userNameTren'),
 					isDone: false,
 					workoutTime: this.start_time
 				})
-    			.then((response) => (this.info = response))
+				.then((response) => (this.info = response))
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 
 			if (this.info["status"] == 201) {
 				window.location.href = '/profile';
@@ -597,7 +624,7 @@ export default {
 		},
 		openPopup() {
 			this.isPopup = true;
-			if(this.openPopup){
+			if (this.openPopup) {
 				document.documentElement.style.overflow = 'hidden'
 				sessionStorage.setItem('flagTren', 0);
 				return
@@ -605,28 +632,28 @@ export default {
 		},
 		openPopupOtjimaniy() {
 			this.isPopupOtjimaniy = true;
-			if(this.openPopupOtjimaniy){
+			if (this.openPopupOtjimaniy) {
 				document.documentElement.style.overflow = 'hidden'
 				return
 			}
 		},
 		openPopupPodtygivaniy() {
 			this.isPopupPodtygivaniy = true;
-			if(this.openPopupPodtygivaniy){
+			if (this.openPopupPodtygivaniy) {
 				document.documentElement.style.overflow = 'hidden'
 				return
 			}
 		},
 		openPopupPress() {
 			this.isPopupPress = true;
-			if(this.openPopupPress){
+			if (this.openPopupPress) {
 				document.documentElement.style.overflow = 'hidden'
 				return
 			}
 		},
 		openPopupNaNogi() {
 			this.isPopupNaNogi = true;
-			if(this.openPopupNaNogi){
+			if (this.openPopupNaNogi) {
 				document.documentElement.style.overflow = 'hidden'
 				return
 			}
@@ -637,7 +664,7 @@ export default {
 			this.isPopupPodtygivaniy = false;
 			this.isPopupPress = false;
 			this.isPopupNaNogi = false;
-			if(this.closePopup){
+			if (this.closePopup) {
 				document.documentElement.style.overflow = 'auto'
 				return
 			}
