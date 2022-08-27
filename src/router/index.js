@@ -13,12 +13,6 @@ const routes = [{
             import ('../views/Registration.vue')
     },
     {
-        path: '/password',
-        name: 'password',
-        component: () =>
-            import ('../views/Password.vue')
-    },
-    {
         path: '/main-page',
         name: 'main-page',
         component: () =>
@@ -41,18 +35,6 @@ const routes = [{
         name: 'password-profile',
         component: () =>
             import ('../views/PasswordProfile.vue')
-    },
-    {
-        path: '/loader',
-        name: 'loader',
-        component: () =>
-            import ('../views/Loader.vue')
-    },
-    {
-        path: '/test',
-        name: 'test',
-        component: () =>
-            import ('../views/test.vue')
     },
 ]
 

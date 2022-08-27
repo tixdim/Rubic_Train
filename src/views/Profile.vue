@@ -335,7 +335,6 @@ export default {
 				console.log(error["response"]["data"]);
 			})
 			.finally(() => (this.loader = false));
-		console.log(this.loader);
 	},
 
 	methods: {
