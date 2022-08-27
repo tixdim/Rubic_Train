@@ -67,5 +67,12 @@ export default {
 			this.$emit('closePopup')
 		}
 	},
+	mounted () {
+		document.addEventListener('keydown', function (e) {
+			if (e.code === 'Escape') {
+				closePopup();
+			}
+		});
+	},
 }
 </script>

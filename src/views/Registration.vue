@@ -148,6 +148,18 @@ export default {
 				return
 			}
 		}
-	}
+	},
+	mounted () {
+		document.addEventListener('keydown', function (e) {
+			if (e.code === 'Escape') {
+				closePopup();
+			}
+		});
+		document.addEventListener('keydown', function (e) {
+			if (e.code === 'Enter') {
+				sendButtonReg();
+			}
+		});
+	},
 }
 </script>

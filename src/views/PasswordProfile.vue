@@ -155,5 +155,12 @@ export default {
 			}
 		}
 	},
+	mounted () {
+		document.addEventListener('keydown', function (e) {
+			if (e.code === 'Enter') {
+				sendButtonEditPass();
+			}
+		});
+	},
 }
 </script>
