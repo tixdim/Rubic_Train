@@ -318,6 +318,10 @@ export default {
 		this.surname = localStorage.getItem("surname");
 		this.dateRegistration = localStorage.getItem("dateRegistration");
 		this.avatarUrl = localStorage.getItem("avatarUrl");
+		
+		if (this.id == "" || this.email == "" || this.nickname == "" || this.isBoy == "" || this.name == "" || this.surname == "" || this.dateRegistration == "") {
+			window.location.href = '/';
+		}
 	},
 
 	async mounted() {
@@ -335,7 +339,6 @@ export default {
 				console.log(error["response"]["data"]);
 			})
 			.finally(() => (this.loader = false));
-		console.log(this.loader);
 	},
 
 	methods: {

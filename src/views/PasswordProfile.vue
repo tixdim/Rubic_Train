@@ -77,6 +77,13 @@ export default {
 			id: 0,
 		}
 	},
+
+	created() {
+		if (this.id == "" || this.email == "" || this.nickname == "" || this.isBoy == "" || this.name == "" || this.surname == "" || this.dateRegistration == "") {
+			window.location.href = '/';
+		}
+	},
+
 	methods: {
 		async sendButtonEditPass() {
 			if (this.showPass == true) {

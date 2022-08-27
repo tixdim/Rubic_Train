@@ -41,6 +41,12 @@ export default {
 		footerComponents,
 	},
 
+	created() {
+		if (this.id == "" || this.email == "" || this.nickname == "" || this.isBoy == "" || this.name == "" || this.surname == "" || this.dateRegistration == "" || this.avatarUrl == "") {
+			window.location.href = '/';
+		}
+	},
+
 	data() {
 		return {
 			info: null,

@@ -77,9 +77,20 @@ export default {
 			showPass: false,
 			Pass: "",
 			info: null,
-			avatarUrl: 0,
+			avatarUrl: localStorage.getItem("avatarUrl"),
 		}
 	},
+
+	created() {
+		localStorage.setItem("email", "")
+		localStorage.setItem("nickname", "")
+		localStorage.setItem("isBoy", "")
+		localStorage.setItem("name", "")
+		localStorage.setItem("surname", "")
+		localStorage.setItem("id", "")
+		localStorage.setItem("dateRegistration", "")
+	},
+
 	methods: {
 		async sendButtonAuth() {
 			if (this.showPass == true) {
@@ -107,7 +118,9 @@ export default {
 				});
 
 			if (this.info["status"] == 200) {
-				this.avatarUrl = 1;
+				if (this.avatarUrl == "") {
+					this.avatarUrl = 1;
+				}
 				localStorage.setItem("email", this.info["data"]["email"])
 				localStorage.setItem("nickname", this.info["data"]["nickname"])
 				localStorage.setItem("isBoy", this.info["data"]["isBoy"])
