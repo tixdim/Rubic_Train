@@ -2,7 +2,7 @@
 	<div class="wrapper">
 		<header-components />
 		<main class="page">
-			<div class="profile">
+			<div v-if="loader == false" class="profile">
 				<div class="profile__container _container">
 					<div class="profile__items">
 						<div class="profile__item-box">
@@ -165,6 +165,9 @@
 					</div>
 				</div>
 			</div>
+			<div v-else class="circle">
+				<div class="circle__loader"></div>
+			</div>
 		</main>
 		<transition name="modal">
 			<div v-if="isPopupProfile" @closePopup="closePopup" class="popup popup-profile">
@@ -302,7 +305,8 @@ export default {
 			surname: "",
 			dateRegistration: "",
 			avatarUrl: 0,
-			countTrain: 0
+			countTrain: 0,
+			loader: true
 		}
 	},
 	created() {
@@ -329,16 +333,18 @@ export default {
 			.then((response) => (this.info = response["data"]))
 			.catch(error => {
 				console.log(error["response"]["data"]);
-			});
+			})
+			.finally(() => (this.loader = false));
+		console.log(this.loader);
 	},
 
 	methods: {
 		async delete_all_tren() {
 			await axios
-    			.delete('http://localhost:63002/api/Workouts/DeleteAllWorkoutPlan/' + this.id)
+				.delete('http://localhost:63002/api/Workouts/DeleteAllWorkoutPlan/' + this.id)
 				.catch(error => {
-        			console.log(error["response"]["data"]);
-      			});
+					console.log(error["response"]["data"]);
+				});
 			window.location.href = '/profile';
 		},
 		async add_tren() {
